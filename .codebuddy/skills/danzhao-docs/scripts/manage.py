@@ -26,6 +26,7 @@ from lib import Issue, SEVERITY_ERROR, configure_utf8_output, print_report
 SCRIPTS_DIR = Path(__file__).resolve().parent
 CHECK_DOCS = SCRIPTS_DIR / "check_docs.py"
 DATA_FILE = SCRIPTS_DIR / "data" / "colloquial-words.txt"
+SLANG_FILE = SCRIPTS_DIR / "data" / "slang-words.txt"
 
 SCRIPT_RULES = [
     ("S01", "语法可编译", "ast.parse 解析通过"),
@@ -36,6 +37,7 @@ SCRIPT_RULES = [
     ("S06", "无硬编码绝对路径", "不包含 Windows/Unix 绝对路径字面量"),
     ("S07", "行尾换行", "文件以换行符结尾"),
     ("S08", "数据文件存在", "scripts/data/colloquial-words.txt 存在"),
+    ("S09", "黑话词表存在", "scripts/data/slang-words.txt 存在"),
 ]
 
 ABSOLUTE_PATH_RE = re.compile(r"[A-Za-z]:[\\/]|(?<![\w.])/(?:home|Users|tmp)/")
@@ -125,6 +127,9 @@ def cmd_scripts() -> int:
     if not DATA_FILE.exists():
         issues.append(Issue(SEVERITY_ERROR, "data/colloquial-words.txt", 0, "S08", "数据文件存在",
                             "缺少口水词词表", "创建 scripts/data/colloquial-words.txt"))
+    if not SLANG_FILE.exists():
+        issues.append(Issue(SEVERITY_ERROR, "data/slang-words.txt", 0, "S09", "黑话词表存在",
+                            "缺少黑话词表", "创建 scripts/data/slang-words.txt"))
     return print_report(issues, "脚本自身校验")
 
 
