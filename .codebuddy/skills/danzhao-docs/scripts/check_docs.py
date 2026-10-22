@@ -31,7 +31,7 @@ SLANG_IGNORE_PREFIX = "!"
 SLANG_CANDIDATE_RE = re.compile(r"(?<![A-Za-z0-9])[a-z]{2,6}(?![A-Za-z0-9])")
 SLANG_IGNORE_WORDS = {"vs", "etc", "eg", "ie", "aka", "emoji", "pdf", "docx", "app", "wifi"}
 
-SKIP_DIRS = {".git", ".codebuddy"}
+SKIP_DIRS = {".git", ".codebuddy", "web"}
 PLACEHOLDERS = ("待填写", "待添加", "待补充")
 EMOJI_WHITELIST = {"⬜", "🟨", "✅", "🔴", "🟢", "⚠"}
 EMOJI_RANGES = ((0x1F000, 0x1FAFF), (0x2600, 0x26FF), (0x2700, 0x27BF), (0x2B00, 0x2BFF))
@@ -43,6 +43,10 @@ DOC_HEADER_FIELDS = ("状态", "创建时间", "学科", "分类")
 CODE_TOKEN_RE = re.compile(r"\b([A-Z]{2})(?:-[A-Z0-9]+)+\b")
 TREE_LINE_RE = re.compile(r"^((?:│   |    )*)(├── |└── )(.*)$")
 SEPARATOR_RE = re.compile(r"^\s*\|?[\s:\-|]+\|?\s*$")
+READABILITY_DOC_NAMES = {"知识点梳理.md", "题库解析.md"}
+LONG_SENTENCE_LIMIT = 60
+SENTENCE_SPLIT_RE = re.compile(r"[。！？；]")
+CONTENT_CHAR_RE = re.compile(r"[\u4e00-\u9fffA-Za-z0-9]")
 
 RULES = [
     {"id": "R01", "name": "书面语检查", "severity": SEVERITY_ERROR,
@@ -100,7 +104,7 @@ RULES = [
      "desc": "题库.md 中每套含题目的试题（二级标题含 测验/专项/模拟卷/真题/自测 且该章节内含 ### 第 N 题）下方须有「### 订正反馈（套题名）」块，且块内表格须含 概念不清/计算失误/思路错误/审题偏差/知识遗忘 五类错因行",
      "fix": "在对应套题章节内添加订正反馈块，含上述 5 类错因行（模板见 danzhao-docs SKILL.md「套题订正反馈模板」）"},
     {"id": "R19", "name": "评估一致性", "severity": SEVERITY_WARN,
-     "desc": "题库.md 中若某套题同时存在「### 订正反馈」与「### 评估」块，评估的「总体掌握」须与反馈的「是否攻克」一致：反馈全行 🟢 时总体掌握应标 ✅/🟢，否则不应标 ✅",
+     "desc": "题库.md 中若某套题同时存在「### 订正反馈」与「### 评估」块，评估的「总体掌握」须与反馈的「是否攻克」一致：反馈全行 🟢 时总体掌握应标 ✅/🟢，否则不应标 ✅；评估结论含「验证未过」时跳过该检查（用户自评与验证结果不一致属预期）",
      "fix": "对齐评估「总体掌握」与订正反馈的「是否攻克」列"},
 ]
 
@@ -716,6 +720,16 @@ def _parse_overall_mastery(lines, start):
     return None
 
 
+def _section_text(lines, start):
+    """取从 start 行起到下一个标题行（不含）为止的文本，用于块级关键词判断。"""
+    out = []
+    for raw in lines[start:]:
+        if raw.startswith("#"):
+            break
+        out.append(raw)
+    return "\n".join(out)
+
+
 def rule_r19_assessment_block(rel, lines, ctx):
     if Path(rel).name != "题库.md":
         return []
@@ -728,7 +742,7 @@ def rule_r19_assessment_block(rel, lines, ctx):
             if FEEDBACK_HEADING_RE.match(raw):
                 cur_fb = lineno
             elif EVAL_HEADING_RE.match(raw):
-                if cur_fb is not None:
+                if cur_fb is not None and "验证未过" not in _section_text(lines, lineno):
                     conquered = _parse_conquered_cells(lines, cur_fb)
                     overall = _parse_overall_mastery(lines, lineno)
                     if overall is not None and conquered:
@@ -746,6 +760,29 @@ def rule_r19_assessment_block(rel, lines, ctx):
                                 "「订正反馈」仍有未攻克项，但「评估」总体掌握已标 ✅",
                                 "将总体掌握调回 🟨/⬜，或先攻克未攻克项"))
                 cur_fb = None
+    return issues
+
+
+def rule_r20_long_sentences(rel, lines, ctx):
+    if Path(rel).name not in READABILITY_DOC_NAMES:
+        return []
+    issues = []
+    for lineno, raw in iter_content_lines(lines):
+        stripped = raw.strip()
+        if not stripped or stripped.startswith(("|", "#", ">")):
+            continue
+        text = strip_inline_code(raw)
+        text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
+        for sentence in SENTENCE_SPLIT_RE.split(text):
+            if not sentence.strip():
+                continue
+            count = len(CONTENT_CHAR_RE.findall(sentence))
+            if count > LONG_SENTENCE_LIMIT:
+                issues.append(Issue(
+                    SEVERITY_WARN, rel, lineno, "R20", "长句检查",
+                    f"单句约 {count} 字，超过 {LONG_SENTENCE_LIMIT} 字上限",
+                    "拆成 2–3 个短句，一句一个意思；术语首次出现时用白话解释"))
+                break
     return issues
 
 
@@ -767,6 +804,7 @@ FILE_RULES = (
     rule_r17_exercise_separation,
     rule_r18_feedback_block,
     rule_r19_assessment_block,
+    rule_r20_long_sentences,
 )
 
 

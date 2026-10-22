@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>havefun · 网页刷题</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">havefun · 网页刷题</div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="quiz">做题</button>
+      <button class="tab" data-tab="dashboard">监控</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 做题 -->
+    <section id="quiz" class="panel active">
+      <div class="toolbar">
+        <select id="subjectSelect" class="select"></select>
+        <button id="startBtn" class="btn primary">开始答题</button>
+        <span id="quizMeta" class="meta"></span>
+      </div>
+      <div id="quizArea" class="quiz-area">
+        <p class="hint">选择左侧套题后点击「开始答题」。客观题即时判分，非客观题由 AI 初判（未配置时标待复核）。作答与判分结果会自动写回题库文档。</p>
+      </div>
+    </section>
+
+    <!-- 监控 -->
+    <section id="dashboard" class="panel">
+      <div class="toolbar">
+        <button id="refreshBtn" class="btn">刷新</button>
+        <span class="meta">监控页展示这一个学生的正确率、薄弱点与最近练习。</span>
+      </div>
+      <div id="dashArea" class="dash-area">
+        <p class="hint">暂无数据，先去「做题」提交一次吧。</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

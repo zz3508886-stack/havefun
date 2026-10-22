@@ -13,3 +13,8 @@ __pycache__/
 
 # 本地草稿（如不想入库的本地笔记）
 local-notes/
+
+# 网页刷题（web/）运行时数据与本机配置
+web/results.json
+web/config.json
+web/__pycache__/
