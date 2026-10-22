@@ -7,5 +7,9 @@ Desktop.ini
 ~$*
 *.tmp
 
+# Python 缓存（文档校验脚本运行产生）
+__pycache__/
+*.pyc
+
 # 本地草稿（如不想入库的本地笔记）
 local-notes/
