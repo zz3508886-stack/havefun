@@ -1,2 +1,11 @@
-context/CURRENT
-.~lock.*
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Office 临时文件
+~$*
+*.tmp
+
+# 本地草稿（如不想入库的本地笔记）
+local-notes/
