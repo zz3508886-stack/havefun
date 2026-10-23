@@ -1,0 +1,68 @@
+# 本文件为 Anki 导入文件（UTF-8，字段以制表符 Tab 分隔）。
+# 牌组：英语词根地图
+# 字段顺序：词根+前缀 <Tab> 核心词与衍生词清单
+# 用法：作为「英语词汇」牌组的框架卡——先在这里看清一个词根能带出哪些词，
+#       再到「英语词汇」牌组逐个记核心词（带音标/释义/例句/发音）。
+# 标 ※ 的为护理场景或考试高频词；「衍生」中的词只要求混眼熟，不要求拼写。
+# 行首 # 为注释，导入时自动忽略。改完跑 build_decks.py 重新生成 .apkg。
+
+# @tag 层级::框架 词根::G01
+G01 -cept-/-ceive-（拿、取）｜前缀 ac-去 / ex-向外 / de-偏离	核心：accept 接受 / except 除……之外 / receive 收到 / deceive 欺骗 ｜ 衍生：concept 概念 / reception 接待处 / receptionist 接待员 / acceptable 可接受的 / deception 欺骗（名）
+# @tag 层级::框架 词根::G02
+G02 -fect-/-fic-（做、制造）｜前缀 af-去 / ef-出 / per-完全 / in-进入	核心：affect 影响 / effect 效果※ / perfect 完美的 / infect 感染※ ｜ 衍生：effective 有效的※ / efficient 高效的 / defect 缺陷 / affection 感情 / factory 工厂 / fiction 小说
+# @tag 层级::框架 词根::G03
+G03 -ceed-/-cess-（走、行进）｜前缀 suc-下 / pro-向前 / ac-去	核心：succeed 成功 / success 成功 / process 过程※ / access 通道 ｜ 衍生：necessary 必要的※ / successful 成功的 / succession 连续 / recession 衰退
+# @tag 层级::框架 词根::G04
+G04 -vent-/-ven-（来）｜前缀 in-上 / e-出 / pre-先 / con-一起	核心：invent 发明 / event 事件 / prevent 预防※ / convenient 方便的 ｜ 衍生：invention 发明※ / prevention 预防※ / adventure 冒险 / convention 大会 / avenue 大街
+# @tag 层级::框架 词根::G05
+G05 -port-（拿、运）｜前缀 trans-转移 / im-入 / ex-出 / re-回 / sup-下	核心：transport 运输※ / import 进口 / export 出口 / report 报告※ / support 支持 ｜ 衍生：important 重要的※ / opportunity 机会※ / portable 便携的 / reporter 记者
+# @tag 层级::框架 词根::G06
+G06 -spect-（看）｜前缀 ex-向外 / re-反复 / in-入 / sus-暗中	核心：expect 期待※ / respect 尊敬 / inspect 检查※ / suspect 怀疑※ ｜ 衍生：aspect 方面 / prospect 前景 / spectator 观众 / perspective 观点
+# @tag 层级::框架 词根::G07
+G07 -ject-（投、扔）｜前缀 re-回 / in-入 / ob-相反 / sub-下 / e-出	核心：reject 排斥※ / inject 注射※ / object 反对 / subject 学科 ｜ 衍生：project 项目 / eject 射出 / adjective 形容词
+# @tag 层级::框架 词根::G08
+G08 -duce-/-duct-（引导）｜前缀 pro-向前 / re-回 / intro-向内 / con-一起	核心：produce 生产 / reduce 减少※ / introduce 介绍 / conduct 实施 ｜ 衍生：product 产品※ / production 生产 / education 教育 / introduction 介绍 / deduct 扣除
+# @tag 层级::框架 词根::G09
+G09 -pose-（放、置）｜前缀 com-一起 / ex-外 / sup-下 / ob-相反 / pur-向前	核心：compose 组成 / expose 暴露※ / suppose 认为 / oppose 反对 ｜ 衍生：purpose 目的※ / position 位置※ / propose 建议 / opposite 相反的 / component 组成部分
+# @tag 层级::框架 词根::G10
+G10 -mit-/-miss-（送、放）｜前缀 per-通过 / ad-去 / sub-下 / com-一起 / trans-转移	核心：permit 允许 / admit 收治入院※ / submit 提交 / commit 投身 ｜ 衍生：mission 任务 / admission 准入※ / transmit 传输 / dismiss 解散
+# @tag 层级::框架 词根::G11
+G11 -fer-（带、拿）｜前缀 trans-转移 / pre-先 / re-回 / of-靠近 / suf-下	核心：transfer 转院※ / prefer 更喜欢 / refer 参考 / offer 提供※ / suffer 患（病）※ ｜ 衍生：reference 参考※ / conference 会议 / differ 不同 / infer 推断
+# @tag 层级::框架 词根::G12
+G12 -tain-（保持、持有）｜前缀 main-手 / ob-加强 / con-一起 / re-回 / sus-下	核心：maintain 维持※ / obtain 获得 / contain 包含 / retain 潴留※ ｜ 衍生：certain 确定的※ / container 容器 / entertain 娱乐 / sustain 维持
+# @tag 层级::框架 词根::G13
+G13 -sist-（站）｜前缀 in-上 / re-反 / per-完全 / as-旁	核心：insist 坚持 / resist 抵抗※ / persist 坚持 / assist 协助※ ｜ 衍生：exist 存在 / assistant 助手※ / consistent 一致的
+# @tag 层级::框架 词根::G14
+G14 -dict-（说）｜前缀 pre-先 / contra-反	核心：predict 预测 / dictation 听写 / dictionary 词典 ｜ 衍生：contradict 反驳 / dictate 口述 / verdict 裁决
+# @tag 层级::框架 词根::G15
+G15 -scribe-/-script-（写）｜前缀 de-下 / pre-先 / sub-下 / tran-转移	核心：describe 描述※ / prescribe 开处方※ / prescription 处方※ ｜ 衍生：subscribe 订阅 / manuscript 手稿 / transcript 文字记录
+# @tag 层级::框架 词根::G16
+G16 -tract-（拉）｜前缀 at-去 / ex-出 / con-一起 / dis-分开 / sub-下	核心：attract 吸引 / extract 拔出※ / contract 收缩※ / distract 分心 ｜ 衍生：tractor 拖拉机 / subtract 减去 / abstract 抽象的 / traction 牵引
+# @tag 层级::框架 词根::G17
+G17 -press-（压）｜前缀 ex-出 / im-上 / com-一起 / de-下 / sup-下	核心：express 表达 / impress 使印象深刻 / compress 压迫※ / depress 使沮丧 ｜ 衍生：pressure 压力※ / suppress 压制 / oppress 压迫
+# @tag 层级::框架 词根::G18
+G18 -form-（形状、形成）｜前缀 in-内 / re-重新 / trans-改变 / uni-单一 / per-完全	核心：inform 通知※ / reform 改革 / transform 转变 / uniform 制服※ / perform 执行※ ｜ 衍生：information 信息※ / platform 平台 / formula 公式 / formation 形成
+# @tag 层级::框架 词根::G19
+G19 -vid-/-vis-（看）｜前缀 ad-去 / re-再 / pro-前 / e-出 / tele-远	核心：advice 建议 / advise 建议 / visit 查房※ / revise 复习 / provide 提供 ｜ 衍生：visible 可见的 / television 电视 / vision 视力 / evident 明显的 / individual 个人
+# @tag 层级::框架 词根::G20
+G20 -rupt-（断裂）｜前缀 inter-中间 / e-出 / ab-离开	核心：interrupt 打断 / erupt 突发※ / abrupt 突然的 ｜ 衍生：bankrupt 破产 / disrupt 扰乱 / eruption 喷发
+# @tag 层级::框架 词根::G21
+G21 -struct-（建造）｜前缀 con-一起 / in-内 / de-向下	核心：construct 建造 / instruct 指导※ / structure 结构※ ｜ 衍生：construction 建设 / destruction 破坏※ / obstruct 阻塞
+# @tag 层级::框架 词根::G22
+G22 -spir-（呼吸）｜前缀 in-入 / re-回 / ex-出	核心：inspire 鼓舞 / respiration 呼吸※ / expire 过期※ ｜ 衍生：spirit 精神※ / spiritual 精神的 / perspire 出汗
+# @tag 层级::框架 词根::G23
+G23 -vit-/-viv-（生命）｜前缀 sur-超过 / re-再	核心：vital 生命体征※ / vitamin 维生素 / survive 存活 ｜ 衍生：revive 复苏※ / survival 生存 / vivid 生动的
+# @tag 层级::框架 词根::G24
+G24 -med-/-medi-（医治、中间）｜前缀 im-无 / re-回	核心：medical 医学的※ / medicine 药物※ / immediate 立即※ / medium 中等的 ｜ 衍生：remedy 疗法※ / medication 药物治疗 / immediately 立即 / mediate 调解
+# @tag 层级::框架 词根::G25
+G25 -meter-（测量）/ -therm-（热）	核心：thermometer 体温计※ / centimeter 厘米※ / temperature 体温※ ｜ 衍生：barometer 气压计 / diameter 直径 / geometry 几何
+# @tag 层级::框架 词根::G26
+G26 -path-（病、感觉）｜前缀 sym-共同 / em-入 / a-无	核心：patient 病人※ / sympathy 同情 ｜ 衍生：empathy 共情※ / pathetic 可怜的 / pathology 病理学 / apathy 冷漠
+# @tag 层级::框架 词根::G27
+G27 -log-（说、学问）｜前缀 dia-两者之间 / apo-离开 / techno-技艺 / bio-生命	核心：dialogue 对话 / apology 道歉 / technology 技术※ ｜ 衍生：biology 生物 / psychology 心理学 / geology 地质学 / logic 逻辑
+# @tag 层级::框架 词根::G28
+G28 -ply-/-ple-（折、满）｜前缀 ap-去 / sup-下 / re-回 / com-完全 / multi-多 / im-内	核心：apply 涂抹※ / supply 供应 / reply 回复 / complete 完成 ｜ 衍生：multiply 乘以 / imply 暗示 / comply 遵守 / supplies 物资
+# @tag 层级::框架 词根::G29
+G29 -mov-/-mot-/-mob-（动）｜前缀 re-回 / pro-向前 / e-出	核心：move 移动※ / remove 移除※ / motor 马达 / mobile 移动的 / promote 促进※ ｜ 衍生：movement 运动※ / motion 运动 / emotion 情感 / movie 电影
+# @tag 层级::框架 词根::G30
+G30 -val-/-vail-（价值、力量）｜前缀 e-出 / con-一起	核心：value 价值 / valid 有效的 / available 可获得的※ ｜ 衍生：valuable 有价值的 / evaluate 评估※ / equivalent 相等的 / prevail 盛行

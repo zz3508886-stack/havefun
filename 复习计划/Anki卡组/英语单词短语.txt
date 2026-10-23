@@ -1,0 +1,389 @@
+# 本文件为 Anki 导入文件（UTF-8，字段以制表符 Tab 分隔）。
+# 牌组：英语词汇（与其他词汇类文件合并打包）
+# 字段顺序：首词 <Tab> 该词的固定搭配列表（短语+释义，用「；」分隔）
+# 定位：认识级。固定搭配不再单独占卡，而是挂在对应单词下——看到一个词，
+#       同时看到它的一串搭配，形成搭配网络而不是零散记忆。
+# 对应河南单招大纲「掌握约 400–500 个习惯用语或固定搭配」的要求。
+# 可按 短语族::xxx 标签筛选某个词的全部搭配。
+# 行首 # 为注释，导入时自动忽略。改完跑 build_decks.py 重新生成 .apkg。
+
+# ==== be（29 个搭配）====
+# @tag 层级::认识级 短语族::be
+be	be good at 擅长；be good for 对……有益；be bad for 对……有害；be interested in 对……感兴趣；be proud of 为……自豪；be afraid of 害怕；be famous for 因……闻名；be late for 迟到；be ready for 为……准备好；be full of 充满；be short of 缺乏；be strict with 对……严格；be satisfied with 对……满意；be popular with 受……欢迎；be covered with 被……覆盖；be filled with 装满；be busy with 忙于；be used to 习惯于；be used for 被用来做；be made of 由……制成（看得出原料）；be made from 由……制成（看不出原料）；be born in 出生于；be married to 与……结婚；be different from 与……不同；be similar to 与……相似；be kind to 对……友好；be polite to 对……有礼貌；be sure of 确信；be tired of 厌倦
+
+# ==== take（21 个搭配）====
+# @tag 层级::认识级 短语族::take
+take	take away 拿走；take care 小心；take care of 照顾；take down 记下；take off 脱下、起飞；take out 取出；take part in 参加；take place 发生；take up 开始从事；take it easy 别紧张；take after （长相）像；take one's time 慢慢来；take turns 轮流；take action 采取行动；take measures 采取措施；take charge of 负责；take the place of 代替；take exercise 做运动；take medicine 吃药；take notes 记笔记；take advantage of 利用
+
+# ==== make（14 个搭配）====
+# @tag 层级::认识级 短语族::make
+make	make friends 交朋友；make fun of 取笑；make sure 确保；make up 编造、组成；make up one's mind 下定决心；make a face 做鬼脸；make a living 谋生；make a decision 做决定；make a mistake 犯错误；make progress 取得进步；make room for 给……腾地方；make use of 利用；make a contribution to 为……做贡献；make a difference 有影响、起作用
+
+# ==== get（12 个搭配）====
+# @tag 层级::认识级 短语族::get
+get	get along with 与……相处；get off 下车；get on 上车；get over 克服；get ready for 为……做准备；get rid of 摆脱；get together 聚会；get up 起床；get in touch with 与……取得联系；get into trouble 陷入麻烦；get used to 习惯于；get along well with 与……相处融洽
+
+# ==== put（12 个搭配）====
+# @tag 层级::认识级 短语族::put
+put	put away 收好；put down 放下；put off 推迟；put on 穿上、上演；put out 扑灭；put up 张贴、搭建；put up with 忍受；put on weight 增重；put an end to 结束；put into practice 付诸实践；put forward a plan 提出计划；put out a fire 灭火
+
+# ==== come（11 个搭配）====
+# @tag 层级::认识级 短语族::come
+come	come across 偶遇；come back 回来；come from 来自；come in 进来；come on 加油；come out 出版、出来；come true 实现；come up with 想出；come to an end 结束；come into being 形成；come to a conclusion 得出结论
+
+# ==== go（11 个搭配）====
+# @tag 层级::认识级 短语族::go
+go	go away 离开；go back 回去；go by （时间）过去；go on 继续；go out 外出；go over 复习；go shopping 去购物；go to bed 上床睡觉；go abroad 出国；go for a walk 去散步；go in for 参加、爱好
+
+# ==== in（11 个搭配）====
+# @tag 层级::认识级 短语族::in
+in	in a word 总之；in other words 换句话说；in general 一般来说；in particular 特别地；in public 公开地；in private 私下；in advance 提前；in danger 处于危险中；in peace 和平地；in surprise 惊奇地；in time 及时
+
+# ==== look（11 个搭配）====
+# @tag 层级::认识级 短语族::look
+look	look after 照料；look at 看；look for 寻找；look forward to 期待；look like 看起来像；look out 小心；look up 查阅；look down upon 轻视；look up to 尊敬；look down on 轻视；look for trouble 自找麻烦
+
+# ==== give（10 个搭配）====
+# @tag 层级::认识级 短语族::give
+give	give away 捐赠；give back 归还；give in 屈服；give out 分发；give up 放弃；give a talk 做报告；give a lesson 授课；give birth to 生育；give rise to 引起；give way to 让位于
+
+# ==== keep（10 个搭配）====
+# @tag 层级::认识级 短语族::keep
+keep	keep on 继续；keep out 不许进入；keep up 保持；keep up with 跟上；keep in mind 记住；keep in touch 保持联系；keep a diary 记日记；keep healthy 保持健康；keep one's word 守信；keep an eye on 留意
+
+# ==== turn（8 个搭配）====
+# @tag 层级::认识级 短语族::turn
+turn	turn down 调小、拒绝；turn into 变成；turn off 关掉；turn on 打开；turn over 翻转；turn up 调大、出现；turn to sb for help 向某人求助；turn a blind eye to 对……视而不见
+
+# ==== at（7 个搭配）====
+# @tag 层级::认识级 短语族::at
+at	at the same time 同时；at first 起初；at least 至少；at most 最多；at once 立刻；at present 目前；at risk 有危险
+
+# ==== have（7 个搭配）====
+# @tag 层级::认识级 短语族::have
+have	have a rest 休息一下；have a cold 感冒；have a good time 玩得开心；have an effect on 对……有影响；have trouble in 做……有困难；have an influence on 对……有影响；have access to 有机会使用
+
+# ==== bring（6 个搭配）====
+# @tag 层级::认识级 短语族::bring
+bring	bring about 导致；bring back 带回；bring in 引入；bring up 抚养；bring about a change 带来变化；bring into effect 实施
+
+# ==== break（5 个搭配）====
+# @tag 层级::认识级 短语族::break
+break	break down 出故障；break out （战争、疾病）爆发；break the rule 违反规则；break the record 打破纪录；break one's promise 违背诺言
+
+# ==== fall（5 个搭配）====
+# @tag 层级::认识级 短语族::fall
+fall	fall asleep 入睡；fall behind 落后；fall ill 生病；fall in love with 爱上；fall into the habit of 养成……的习惯
+
+# ==== set（5 个搭配）====
+# @tag 层级::认识级 短语族::set
+set	set off 出发；set out 出发；set up 建立；set an example 树立榜样；set free 释放
+
+# ==== carry（4 个搭配）====
+# @tag 层级::认识级 短语族::carry
+carry	carry on 继续；carry out 执行、实行；carry out a plan 执行计划；carry out research 开展研究
+
+# ==== do（4 个搭配）====
+# @tag 层级::认识级 短语族::do
+do	do well in 擅长；do one's best 尽力；do harm to 对……有害；do some shopping 买东西
+
+# ==== on（4 个搭配）====
+# @tag 层级::认识级 短语族::on
+on	on time 准时；on purpose 故意；on sale 在售；on show 在展出
+
+# ==== stand（4 个搭配）====
+# @tag 层级::认识级 短语族::stand
+stand	stand for 代表；stand by 支持；stand in the way 阻碍；stand at attention 立正
+
+# ==== by（3 个搭配）====
+# @tag 层级::认识级 短语族::by
+by	by the way 顺便说；by accident 偶然；by mistake 错误地
+
+# ==== call（3 个搭配）====
+# @tag 层级::认识级 短语族::call
+call	call for 需要；call on 拜访；call up 打电话
+
+# ==== catch（3 个搭配）====
+# @tag 层级::认识级 短语族::catch
+catch	catch up with 赶上；catch a cold 感冒；catch fire 着火
+
+# ==== hand（3 个搭配）====
+# @tag 层级::认识级 短语族::hand
+hand	hand in 上交；hand out 分发；hand over 移交
+
+# ==== lose（3 个搭配）====
+# @tag 层级::认识级 短语族::lose
+lose	lose weight 减肥；lose one's way 迷路；lose interest in 失去兴趣
+
+# ==== out（3 个搭配）====
+# @tag 层级::认识级 短语族::out
+out	out of date 过时；out of order 出故障；out of work 失业
+
+# ==== pay（3 个搭配）====
+# @tag 层级::认识级 短语族::pay
+pay	pay attention to 注意；pay for 付款；pay a visit to 参观
+
+# ==== think（3 个搭配）====
+# @tag 层级::认识级 短语族::think
+think	think about 考虑；think of 想起；think over 仔细考虑
+
+# ==== arrive（2 个搭配）====
+# @tag 层级::认识级 短语族::arrive
+arrive	arrive at 到达（小地方）；arrive in 到达（大地方）
+
+# ==== change（2 个搭配）====
+# @tag 层级::认识级 短语族::change
+change	change one's mind 改变主意；change into 变成
+
+# ==== check（2 个搭配）====
+# @tag 层级::认识级 短语族::check
+check	check in 登记入住；check out 结账离开
+
+# ==== hold（2 个搭配）====
+# @tag 层级::认识级 短语族::hold
+hold	hold on 等一下；hold up 举起、耽搁
+
+# ==== pick（2 个搭配）====
+# @tag 层级::认识级 短语族::pick
+pick	pick up 捡起、（车）接人；pick out 挑出
+
+# ==== play（2 个搭配）====
+# @tag 层级::认识级 短语族::play
+play	play a part in 在……中起作用；play an important role in 发挥重要作用
+
+# ==== show（2 个搭配）====
+# @tag 层级::认识级 短语族::show
+show	show off 炫耀；show up 出现
+
+# ==== try（2 个搭配）====
+# @tag 层级::认识级 短语族::try
+try	try on 试穿；try out 试验
+
+# ==== work（2 个搭配）====
+# @tag 层级::认识级 短语族::work
+work	work out 解决、锻炼；work on 从事
+
+# ==== again（1 个搭配）====
+# @tag 层级::认识级 短语族::again
+again	again and again 反复地
+
+# ==== agree（1 个搭配）====
+# @tag 层级::认识级 短语族::agree
+agree	agree with 同意
+
+# ==== ask（1 个搭配）====
+# @tag 层级::认识级 短语族::ask
+ask	ask for 请求
+
+# ==== begin（1 个搭配）====
+# @tag 层级::认识级 短语族::begin
+begin	begin with 以……开始
+
+# ==== belong（1 个搭配）====
+# @tag 层级::认识级 短语族::belong
+belong	belong to 属于
+
+# ==== care（1 个搭配）====
+# @tag 层级::认识级 短语族::care
+care	care about 关心
+
+# ==== clean（1 个搭配）====
+# @tag 层级::认识级 短语族::clean
+clean	clean up 清理
+
+# ==== deal（1 个搭配）====
+# @tag 层级::认识级 短语族::deal
+deal	deal with 处理
+
+# ==== depend（1 个搭配）====
+# @tag 层级::认识级 短语族::depend
+depend	depend on 依靠
+
+# ==== die（1 个搭配）====
+# @tag 层级::认识级 短语族::die
+die	die of 死于（疾病）
+
+# ==== dream（1 个搭配）====
+# @tag 层级::认识级 短语族::dream
+dream	dream of 梦想
+
+# ==== end（1 个搭配）====
+# @tag 层级::认识级 短语族::end
+end	end up 最终成为
+
+# ==== enjoy（1 个搭配）====
+# @tag 层级::认识级 短语族::enjoy
+enjoy	enjoy oneself 玩得开心
+
+# ==== escape（1 个搭配）====
+# @tag 层级::认识级 短语族::escape
+escape	escape from 逃脱
+
+# ==== fight（1 个搭配）====
+# @tag 层级::认识级 短语族::fight
+fight	fight for 为……而战
+
+# ==== fill（1 个搭配）====
+# @tag 层级::认识级 短语族::fill
+fill	fill in 填写
+
+# ==== find（1 个搭配）====
+# @tag 层级::认识级 短语族::find
+find	find out 查明
+
+# ==== for（1 个搭配）====
+# @tag 层级::认识级 短语族::for
+for	for instance 例如
+
+# ==== grow（1 个搭配）====
+# @tag 层级::认识级 短语族::grow
+grow	grow up 长大
+
+# ==== hear（1 个搭配）====
+# @tag 层级::认识级 短语族::hear
+hear	hear from 收到……来信
+
+# ==== help（1 个搭配）====
+# @tag 层级::认识级 短语族::help
+help	help oneself to 自取、随便吃
+
+# ==== here（1 个搭配）====
+# @tag 层级::认识级 短语族::here
+here	here and there 到处
+
+# ==== hurry（1 个搭配）====
+# @tag 层级::认识级 短语族::hurry
+hurry	hurry up 赶快
+
+# ==== join（1 个搭配）====
+# @tag 层级::认识级 短语族::join
+join	join in 参加
+
+# ==== knock（1 个搭配）====
+# @tag 层级::认识级 短语族::knock
+knock	knock at 敲
+
+# ==== laugh（1 个搭配）====
+# @tag 层级::认识级 短语族::laugh
+laugh	laugh at 嘲笑
+
+# ==== learn（1 个搭配）====
+# @tag 层级::认识级 短语族::learn
+learn	learn by heart 记住、背下
+
+# ==== listen（1 个搭配）====
+# @tag 层级::认识级 短语族::listen
+listen	listen to 听
+
+# ==== little（1 个搭配）====
+# @tag 层级::认识级 短语族::little
+little	little by little 渐渐地
+
+# ==== more（1 个搭配）====
+# @tag 层级::认识级 短语族::more
+more	more and more 越来越
+
+# ==== now（1 个搭配）====
+# @tag 层级::认识级 短语族::now
+now	now and then 偶尔
+
+# ==== pass（1 个搭配）====
+# @tag 层级::认识级 短语族::pass
+pass	pass by 经过
+
+# ==== point（1 个搭配）====
+# @tag 层级::认识级 短语族::point
+point	point at 指着
+
+# ==== prepare（1 个搭配）====
+# @tag 层级::认识级 短语族::prepare
+prepare	prepare for 为……做准备
+
+# ==== protect（1 个搭配）====
+# @tag 层级::认识级 短语族::protect
+protect	protect from 保护……免受
+
+# ==== provide（1 个搭配）====
+# @tag 层级::认识级 短语族::provide
+provide	provide with 提供
+
+# ==== refer（1 个搭配）====
+# @tag 层级::认识级 短语族::refer
+refer	refer to 参考
+
+# ==== ring（1 个搭配）====
+# @tag 层级::认识级 短语族::ring
+ring	ring up 打电话
+
+# ==== run（1 个搭配）====
+# @tag 层级::认识级 短语族::run
+run	run away 逃跑
+
+# ==== send（1 个搭配）====
+# @tag 层级::认识级 短语族::send
+send	send for 派人去请
+
+# ==== shout（1 个搭配）====
+# @tag 层级::认识级 短语族::shout
+shout	shout at 对……大声喊
+
+# ==== shut（1 个搭配）====
+# @tag 层级::认识级 短语族::shut
+shut	shut down 关闭
+
+# ==== sooner（1 个搭配）====
+# @tag 层级::认识级 短语族::sooner
+sooner	sooner or later 迟早
+
+# ==== speak（1 个搭配）====
+# @tag 层级::认识级 短语族::speak
+speak	speak of 谈到
+
+# ==== stay（1 个搭配）====
+# @tag 层级::认识级 短语族::stay
+stay	stay up 熬夜
+
+# ==== step（1 个搭配）====
+# @tag 层级::认识级 短语族::step
+step	step by step 一步步地
+
+# ==== stop（1 个搭配）====
+# @tag 层级::认识级 短语族::stop
+stop	stop doing 停止做（正在做的事）
+
+# ==== succeed（1 个搭配）====
+# @tag 层级::认识级 短语族::succeed
+succeed	succeed in 在……方面成功
+
+# ==== talk（1 个搭配）====
+# @tag 层级::认识级 短语族::talk
+talk	talk about 谈论
+
+# ==== thank（1 个搭配）====
+# @tag 层级::认识级 短语族::thank
+thank	thank for 因……而感谢
+
+# ==== throw（1 个搭配）====
+# @tag 层级::认识级 短语族::throw
+throw	throw away 扔掉
+
+# ==== under（1 个搭配）====
+# @tag 层级::认识级 短语族::under
+under	under control 在控制之下
+
+# ==== up（1 个搭配）====
+# @tag 层级::认识级 短语族::up
+up	up to date 最新的
+
+# ==== wait（1 个搭配）====
+# @tag 层级::认识级 短语族::wait
+wait	wait for 等待
+
+# ==== wake（1 个搭配）====
+# @tag 层级::认识级 短语族::wake
+wake	wake up 醒来
+
+# ==== worry（1 个搭配）====
+# @tag 层级::认识级 短语族::worry
+worry	worry about 担心
+

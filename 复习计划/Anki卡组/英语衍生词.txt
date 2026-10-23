@@ -1,0 +1,117 @@
+# 本文件为 Anki 导入文件（UTF-8，字段以制表符 Tab 分隔）。
+# 牌组：英语衍生词
+# 字段顺序：单词+音标 <Tab> 中文释义｜所属词根
+# 定位：认识级（只要求混眼熟，不要求拼写/运用），卡片方向为「看英文认中文」。
+# 这些词是各词根的同族衍生词，用于扩大眼熟范围、帮助猜词义；
+# 已在「英语词汇」牌组单独成卡的词（如 concept、important、necessary）不在此重复。
+# 用法：新卡上限建议设 10–15 张/天，时间紧时可整组暂停，不影响核心词进度。
+# 行首 # 为注释，导入时自动忽略。改完跑 build_decks.py 重新生成 .apkg。
+
+# @tag 层级::认识级 词根::G01
+reception /rɪˈsepʃn/	n. 接待处、接待｜G01 -cept- 拿、取
+receptionist /rɪˈsepʃənɪst/	n. 接待员｜G01 -cept- 拿、取
+acceptable /əkˈseptəbl/	adj. 可接受的｜G01 -cept- 拿、取
+deception /dɪˈsepʃn/	n. 欺骗｜G01 -cept- 拿、取
+# @tag 层级::认识级 词根::G02
+defect /ˈdiːfekt/	n. 缺陷、毛病｜G02 -fect- 做
+affection /əˈfekʃn/	n. 感情、喜爱｜G02 -fect- 做
+factory /ˈfæktri/	n. 工厂｜G02 -fic- 做
+fiction /ˈfɪkʃn/	n. 小说｜G02 -fic- 做
+# @tag 层级::认识级 词根::G03
+successful /səkˈsesfl/	adj. 成功的｜G03 -cess- 走
+succession /səkˈseʃn/	n. 连续、继任｜G03 -cess- 走
+recession /rɪˈseʃn/	n. 衰退、后退｜G03 -cess- 走
+# @tag 层级::认识级 词根::G04
+adventure /ədˈventʃə/	n. 冒险｜G04 -vent- 来
+convention /kənˈvenʃn/	n. 大会、惯例｜G04 -ven- 来
+avenue /ˈævənjuː/	n. 大街、林荫道｜G04 -ven- 来
+# @tag 层级::认识级 词根::G05
+portable /ˈpɔːtəbl/	adj. 便携的｜G05 -port- 运
+reporter /rɪˈpɔːtə/	n. 记者｜G05 -port- 运
+# @tag 层级::认识级 词根::G06
+prospect /ˈprɒspekt/	n. 前景、前途｜G06 -spect- 看
+spectator /spekˈteɪtə/	n. 观众｜G06 -spect- 看
+perspective /pəˈspektɪv/	n. 观点、视角｜G06 -spect- 看
+# @tag 层级::认识级 词根::G07
+eject /ɪˈdʒekt/	v. 射出、弹出｜G07 -ject- 投
+adjective /ˈædʒɪktɪv/	n. 形容词｜G07 -ject- 投
+# @tag 层级::认识级 词根::G08
+production /prəˈdʌkʃn/	n. 生产、产量｜G08 -duct- 引导
+introduction /ˌɪntrəˈdʌkʃn/	n. 介绍、引进｜G08 -duce- 引导
+deduct /dɪˈdʌkt/	v. 扣除｜G08 -duct- 引导
+# @tag 层级::认识级 词根::G09
+propose /prəˈpəʊz/	v. 建议、求婚｜G09 -pose- 放
+opposite /ˈɒpəzɪt/	adj./prep. 相反的｜G09 -pose- 放
+component /kəmˈpəʊnənt/	n. 组成部分｜G09 -pose- 放
+# @tag 层级::认识级 词根::G10
+transmit /trænzˈmɪt/	v. 传输、传播｜G10 -mit- 送
+dismiss /dɪsˈmɪs/	v. 解散、解雇｜G10 -miss- 送
+# @tag 层级::认识级 词根::G11
+differ /ˈdɪfə/	v. 不同、相异｜G11 -fer- 带
+infer /ɪnˈfɜː/	v. 推断｜G11 -fer- 带
+# @tag 层级::认识级 词根::G12
+container /kənˈteɪnə/	n. 容器｜G12 -tain- 持
+entertain /ˌentəˈteɪn/	v. 娱乐、招待｜G12 -tain- 持
+sustain /səˈsteɪn/	v. 维持、支撑｜G12 -tain- 持
+# @tag 层级::认识级 词根::G13
+consistent /kənˈsɪstənt/	adj. 一致的｜G13 -sist- 站
+# @tag 层级::认识级 词根::G14
+contradict /ˌkɒntrəˈdɪkt/	v. 反驳、与……矛盾｜G14 -dict- 说
+dictate /dɪkˈteɪt/	v. 口述、命令｜G14 -dict- 说
+verdict /ˈvɜːdɪkt/	n. 裁决、结论｜G14 -dict- 说
+# @tag 层级::认识级 词根::G15
+subscribe /səbˈskraɪb/	v. 订阅、认购｜G15 -scribe- 写
+manuscript /ˈmænjuskrɪpt/	n. 手稿｜G15 -script- 写
+transcript /ˈtrænskrɪpt/	n. 文字记录、成绩单｜G15 -script- 写
+# @tag 层级::认识级 词根::G16
+tractor /ˈtræktə/	n. 拖拉机｜G16 -tract- 拉
+abstract /ˈæbstrækt/	adj. 抽象的｜G16 -tract- 拉
+traction /ˈtrækʃn/	n. 牵引、拉力｜G16 -tract- 拉
+# @tag 层级::认识级 词根::G17
+suppress /səˈpres/	v. 压制、抑制｜G17 -press- 压
+oppress /əˈpres/	v. 压迫｜G17 -press- 压
+# @tag 层级::认识级 词根::G18
+platform /ˈplætfɔːm/	n. 平台、站台｜G18 -form- 形
+formula /ˈfɔːmjələ/	n. 公式、配方｜G18 -form- 形
+formation /fɔːˈmeɪʃn/	n. 形成、编队｜G18 -form- 形
+# @tag 层级::认识级 词根::G19
+vision /ˈvɪʒn/	n. 视力、视觉｜G19 -vis- 看
+evident /ˈevɪdənt/	adj. 明显的｜G19 -vid- 看
+individual /ˌɪndɪˈvɪdʒuəl/	n./adj. 个人；个别的｜G19 -vid- 看
+# @tag 层级::认识级 词根::G20
+bankrupt /ˈbæŋkrʌpt/	adj. 破产的｜G20 -rupt- 断
+disrupt /dɪsˈrʌpt/	v. 扰乱、中断｜G20 -rupt- 断
+eruption /ɪˈrʌpʃn/	n. 喷发、爆发｜G20 -rupt- 断
+# @tag 层级::认识级 词根::G21
+obstruct /əbˈstrʌkt/	v. 阻塞、阻碍｜G21 -struct- 建
+# @tag 层级::认识级 词根::G22
+spiritual /ˈspɪrɪtʃuəl/	adj. 精神的｜G22 -spir- 呼吸
+perspire /pəˈspaɪə/	v. 出汗｜G22 -spir- 呼吸
+# @tag 层级::认识级 词根::G23
+survival /səˈvaɪvl/	n. 生存、幸存｜G23 -viv- 活
+vivid /ˈvɪvɪd/	adj. 生动的｜G23 -viv- 活
+# @tag 层级::认识级 词根::G24
+medication /ˌmedɪˈkeɪʃn/	n. 药物治疗、药物｜G24 -med- 医治
+immediately /ɪˈmiːdiətli/	adv. 立即｜G24 -medi- 中间
+mediate /ˈmiːdieɪt/	v. 调解｜G24 -medi- 中间
+# @tag 层级::认识级 词根::G25
+barometer /bəˈrɒmɪtə/	n. 气压计｜G25 -meter- 测量
+diameter /daɪˈæmɪtə/	n. 直径｜G25 -meter- 测量
+geometry /dʒiˈɒmətri/	n. 几何｜G25 -meter- 测量
+# @tag 层级::认识级 词根::G26
+pathetic /pəˈθetɪk/	adj. 可怜的、差劲的｜G26 -path- 感觉
+pathology /pəˈθɒlədʒi/	n. 病理学｜G26 -path- 病
+apathy /ˈæpəθi/	n. 冷漠｜G26 -path- 感觉
+# @tag 层级::认识级 词根::G27
+psychology /saɪˈkɒlədʒi/	n. 心理学｜G27 -log- 学问
+geology /dʒiˈɒlədʒi/	n. 地质学｜G27 -log- 学问
+logic /ˈlɒdʒɪk/	n. 逻辑｜G27 -log- 学问
+# @tag 层级::认识级 词根::G28
+comply /kəmˈplaɪ/	v. 遵守｜G28 -ply- 折
+supplies /səˈplaɪz/	n. 物资、补给｜G28 -ply- 满
+# @tag 层级::认识级 词根::G29
+emotion /ɪˈməʊʃn/	n. 情感｜G29 -mot- 动
+movie /ˈmuːvi/	n. 电影｜G29 -mov- 动
+# @tag 层级::认识级 词根::G30
+equivalent /ɪˈkwɪvələnt/	adj. 相等的、等值的｜G30 -val- 价值
+prevail /prɪˈveɪl/	v. 盛行、获胜｜G30 -vail- 力量

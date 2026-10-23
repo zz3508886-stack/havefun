@@ -1,0 +1,98 @@
+# 本文件为 Anki 导入文件（UTF-8，字段以制表符 Tab 分隔）。
+# 牌组：英语作文模板
+# 字段顺序：题型/卡名 <Tab> 内容
+# 用法：先背「框架 + 词块」卡（看题型说结构），再背「范文」卡（通读 + 挑 3 句默写）。
+# 每类作文的范文都控制在 80 词左右、只用简单句，照抄结构即可得分，不需要高级句型。
+# 行首 # 为注释，导入时自动忽略。改完跑 build_decks.py 重新生成 .apkg。
+
+① 自我介绍｜框架 + 词块	三段式：
+第一段（我是谁）：姓名、年龄、来自哪里、学校与专业
+第二段（我是什么样的人）：性格 + 爱好 + 为什么选护理
+第三段（我的目标）：努力方向 + 一句表决心
+
+词块：
+My name is ... / I am ... years old.
+I come from ... / I am a student at ...
+My major is nursing. / I am majoring in nursing.
+I am an outgoing / hard-working / careful person.
+In my free time, I like reading / running / listening to music.
+I chose nursing because I want to help sick people.
+I hope to become a good nurse in the future.
+I will study hard to make my dream come true.
+① 自我介绍｜范文（约 80 词）	My name is Li Hua. I am sixteen years old. I come from Zhengzhou. I am a student at a vocational school, and my major is nursing. I am an outgoing and careful person. In my free time, I like reading and running. I chose nursing because I want to help sick people. Being a nurse is not easy, but I am ready to work hard. I hope to become a good nurse in the future.
+
+默写这 3 句：
+1) I am a student at ..., and my major is nursing.
+2) I chose nursing because I want to help sick people.
+3) I will study hard to make my dream come true.
+② 书信｜框架 + 词块	五段式：
+称呼：Dear Miss/Mr ...,
+第一段（目的）：I'm writing to ...
+第二段（正文）：具体事情，2–3 句
+第三段（收尾）：感谢 / 期待回复 / 祝福
+落款：Yours, ... / Best wishes,
+
+常用开头（三选一）：
+I'm writing to thank you for ...
+I'm writing to invite you to ...
+I'm writing to ask for ...
+
+常用结尾（二选一）：
+I'm looking forward to your reply.
+Best wishes to you!
+
+正文词块：
+Thank you very much for your help.
+You were always patient and kind to me.
+With your help, I got better soon.
+I hope you can come to my birthday party.
+② 书信｜范文（感谢信，约 80 词）	Dear Miss Wang,
+I'm writing to thank you for your help. Last week I was ill and stayed in hospital. You took good care of me every day. You were always patient and kind to me. With your help, I got better soon. Thank you so much. I will study harder and try to be a good nurse like you.
+Best wishes to you!
+Yours, Li Hua
+
+默写这 3 句：
+1) I'm writing to thank you for your help.
+2) You were always patient and kind to me.
+3) I will study harder and try to be a good nurse like you.
+③ 倡议书 / 通知｜框架 + 词块	通知先写标题 Notice；倡议书不写标题。
+
+三段式：
+第一段（为什么）：In order to ..., we should ...
+第二段（做什么）：First of all, ... Besides, ... Finally, ...
+第三段（号召）：Let's ... together!
+
+词块：
+In order to protect the environment, we should ...
+In order to keep healthy, we should ...
+First of all, we should ...
+Besides, we'd better ...
+Finally, it is important to ...
+Let's take action right now!
+Action speaks louder than words.
+③ 倡议书 / 通知｜范文（约 75 词）	Notice
+In order to keep healthy, we should have good habits. First of all, we should get up early and go to bed early. Besides, we'd better eat more fruit and vegetables and less junk food. Finally, it is important to take exercise every day. Let's take action right now!
+
+默写这 3 句：
+1) In order to keep healthy, we should have good habits.
+2) Besides, we'd better eat more fruit and vegetables and less junk food.
+3) Let's take action right now!
+④ 提示作文｜框架 + 词块	三段式：
+开头（时间地点人物）：One day, ... / Last Sunday, ...
+中间（经过，按顺序）：First ... Then ... At last ...
+结尾（感受或道理）：I felt ... / I learned that ...
+
+词块：
+One day, on my way to school, I saw ...
+Just then, a boy ...
+I helped him at once.
+At last, we ...
+I felt very happy although I was tired.
+Helping others makes me happy.
+From this thing, I learned that we should help each other.
+④ 提示作文｜范文（约 80 词）	Last Sunday, on my way to the hospital, I saw an old woman lying on the ground. Just then, I ran to her quickly. I asked if she was OK and helped her stand up. At last, I took her to the hospital. The old woman thanked me a lot. I felt very happy although I was tired. Helping others makes me happy.
+
+默写这 3 句：
+1) Last Sunday, on my way to the hospital, I saw an old woman lying on the ground.
+2) I asked if she was OK and helped her stand up.
+3) I felt very happy although I was tired.

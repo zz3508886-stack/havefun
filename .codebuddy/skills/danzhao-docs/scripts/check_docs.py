@@ -31,7 +31,14 @@ SLANG_IGNORE_PREFIX = "!"
 SLANG_CANDIDATE_RE = re.compile(r"(?<![A-Za-z0-9])[a-z]{2,6}(?![A-Za-z0-9])")
 SLANG_IGNORE_WORDS = {"vs", "etc", "eg", "ie", "aka", "emoji", "pdf", "docx", "app", "wifi"}
 
-SKIP_DIRS = {".git", ".codebuddy", "web"}
+# docs/ 属工程文档层，规范归 docs-spec（frontmatter + kebab-case + docs-lint），
+# 其文档形态与复习文档规则（R03 文件名-H1 绑定 / R09 中文数字编号 / R14 英文技术词 /
+# R16 学科分类文档头等）不兼容，故整目录跳过本校验器，避免双规范双源漂移。
+# app/ 为系统代码与运行时数据层（R02 只允许 .md，代码/数据库/node_modules 均非文档），
+# 与 web/ 同理整目录跳过。
+# context/ 是 dev-loop 的过程记忆目录（memory.md/devlog.md 用 YAML 头部，非复习文档的
+# H1/中文编号/文档头规范），与 .codebuddy 同理整目录跳过，否则 R02/R03/R09/R11/R16 全误报。
+SKIP_DIRS = {".git", ".codebuddy", "web", "Anki卡组", "docs", "app", "context"}
 PLACEHOLDERS = ("待填写", "待添加", "待补充")
 EMOJI_WHITELIST = {"⬜", "🟨", "✅", "🔴", "🟢", "⚠"}
 EMOJI_RANGES = ((0x1F000, 0x1FAFF), (0x2600, 0x26FF), (0x2700, 0x27BF), (0x2B00, 0x2BFF))

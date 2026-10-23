@@ -1,0 +1,283 @@
+# 本文件为 Anki 导入文件（UTF-8，字段以制表符 Tab 分隔）。
+# 导入方式：Anki 桌面端 → 文件 → 导入 → 选本文件；
+#   字段分隔符选「制表符(Tab)」，牌组名填「英语词汇」，笔记类型会自动建为「基础(单词·带发音)」。
+# 字段顺序：单词+音标 <Tab> 释义 <Tab> 例句（含中文）｜词根/辨析提示
+# 行首 # 为注释，导入时自动忽略。改完跑 build_decks.py 重新生成 .apkg。
+#
+# 编排方式：按「词根词族」分组，而非字母顺序。同根词成组记忆，记一个词根带出一串词。
+#   G01–G12 为第一批核心词根，G13–G30 为第二批；D01–D10 为形近/近义辨析专项（单招高频考点）。
+# @tag 层级::掌握级 词根::G01
+#   每行末尾「｜」后是词根拆解或辨析要点，例句前段的英文部分会自动生成发音（TTS）。
+#   带 ※ 的是护理场景高频词，优先掌握。可按需要整组删减。
+# 牌组：英语词汇
+
+# ============ 第一批：核心词根 G01–G12 ============
+# G01 -cept-/-ceive-（拿、取）
+# @tag 层级::掌握级 词根::G01
+accept /əkˈsept/	v. 接受	He accepted my gift. 他接受了我的礼物。｜-cept- 拿、取（ac-去+拿）
+except /ɪkˈsept/	prep. 除……之外	Everyone came except Tom. 除汤姆外都来了。｜-cept- 拿（ex-向外拿→排除在外）
+receive /rɪˈsiːv/	v. 收到	I received a letter yesterday. 我昨天收到一封信。｜-ceive- 拿、取
+deceive /dɪˈsiːv/	v. 欺骗	Do not deceive your patients. 别欺骗你的病人。｜-ceive- 拿（de-偏离→拿走真相）
+concept /ˈkɒnsept/	n. 概念	The concept is easy to understand. 这个概念很好理解。｜con-（共同）+ cept（拿）→ 共同抓住
+# G02 -fect-/-fic-（做、制造）
+# @tag 层级::掌握级 词根::G02
+affect /əˈfekt/	v. 影响	The rain affected our plan. 下雨影响了我们的计划。｜-fect- 做（af-去+做→作用于）
+effect /ɪˈfekt/	n. 效果、影响	The medicine had a good effect. 这药效果很好。｜-fect- 做（ef-出→做出的结果）※
+perfect /ˈpɜːfɪkt/	adj. 完美的	Practice makes perfect. 熟能生巧。｜-fect- 做（per-完全→做彻底了）
+infect /ɪnˈfekt/	v. 传染、感染	The wound may infect. 伤口可能会感染。｜-fect- 做（in-进入→病菌进入）※
+effective /ɪˈfektɪv/	adj. 有效的	The treatment is effective. 这种疗法有效。｜ef-（出）+ fect（做）→ 做出来的※
+efficient /ɪˈfɪʃnt/	adj. 高效的	Nurses must be efficient. 护士必须高效。｜ef-（出）+ fic（做）→ 做得出的
+# G03 -ceed-/-cess-（走、行进）
+# @tag 层级::掌握级 词根::G03
+succeed /səkˈsiːd/	vi. 成功	He succeeded in the exam. 他考试成功了。｜-ceed- 走（suc-下→一路走下去）
+success /səkˈses/	n. 成功	Hard work brings success. 努力带来成功。｜-cess- 走
+process /ˈprəʊses/	n. 过程	Recovery is a slow process. 康复是一个缓慢的过程。｜-cess- 走（pro-向前）※
+access /ˈækses/	n. 通道、进入权	This door gives access to the ward. 这扇门通向病房。｜-cess- 走（ac-走向）
+necessary /ˈnesəsəri/	adj. 必要的	Sleep is necessary for recovery. 睡眠对康复是必要的。｜ne-（不离开）+ cess（走）→ 甩不掉的※
+# G04 -vent-/-ven-（来）
+# @tag 层级::掌握级 词根::G04
+invent /ɪnˈvent/	v. 发明	Who invented the light bulb? 谁发明了电灯？｜-vent- 来（in-上→想出来）
+event /ɪˈvent/	n. 事件、活动	The event changed his life. 那件事改变了他的一生。｜-vent- 来（e-出→出现的事）
+prevent /prɪˈvent/	v. 预防、阻止	Wash hands to prevent infection. 洗手以预防感染。｜-vent- 来（pre-先→先来挡住）※
+convenient /kənˈviːniənt/	adj. 方便的	Is this time convenient for you? 这个时间你方便吗？｜-ven- 来（con-一起→凑得来）
+invention /ɪnˈvenʃn/	n. 发明	This invention saves lives. 这项发明拯救生命。｜invent + -ion※
+prevention /prɪˈvenʃn/	n. 预防	Prevention is better than cure. 预防胜于治疗。｜prevent + -ion※
+# G05 -port-（拿、运）
+# @tag 层级::掌握级 词根::G05
+transport /trænˈspɔːt/	v. 运输	They transport patients by ambulance. 他们用救护车运送病人。｜-port- 运（trans-转移）※
+import /ɪmˈpɔːt/	v. 进口	We import medical equipment. 我们进口医疗设备。｜-port- 运（im-入）
+export /ɪkˈspɔːt/	v. 出口	The country exports masks. 这个国家出口口罩。｜-port- 运（ex-出）
+report /rɪˈpɔːt/	v./n. 报告	Report the temperature to the nurse. 把体温报告给护士。｜-port- 带（re-回→带回来）※
+support /səˈpɔːt/	v./n. 支持	His family supports him. 他的家人支持他。｜-port- 带（sup-下→在下面托着）
+important /ɪmˈpɔːtnt/	adj. 重要的	It is important to wash hands. 洗手很重要。｜im-（入）+ port（运）→ 有分量的※
+opportunity /ˌɒpəˈtjuːnəti/	n. 机会	Do not miss this opportunity. 别错过这个机会。｜op-（靠近）+ port（运）→ 送到面前
+# G06 -spect-（看）
+# @tag 层级::掌握级 词根::G06
+expect /ɪkˈspekt/	v. 期待、预料	We expect a full recovery. 我们期待他完全康复。｜-spect- 看（ex-向外→向外望）※
+respect /rɪˈspekt/	v./n. 尊敬	We respect the elderly. 我们尊敬老人。｜-spect- 看（re-反复→反复看=重视）
+inspect /ɪnˈspekt/	v. 检查	The doctor inspected the wound. 医生检查了伤口。｜-spect- 看（in-入→看进去）※
+suspect /səˈspekt/	v. 怀疑	I suspect he has a fever. 我怀疑他发烧了。｜-spect- 看（sus-下→暗中观察）※
+aspect /ˈæspekt/	n. 方面	Consider every aspect of care. 考虑护理的每个方面。｜a-（去）+ spect（看）→ 看到的一面
+# G07 -ject-（投、扔）
+# @tag 层级::掌握级 词根::G07
+reject /rɪˈdʒekt/	v. 拒绝、排斥	The body may reject the organ. 身体可能排斥这个器官。｜-ject- 投（re-回→扔回去）※
+inject /ɪnˈdʒekt/	v. 注射	Inject the drug into the muscle. 把药注入肌肉。｜-ject- 投（in-入→投进去）※
+object /əbˈdʒekt/	v. 反对	I object to this plan. 我反对这个计划。｜-ject- 投（ob-相反→反向扔）
+subject /ˈsʌbdʒɪkt/	n. 学科、主题	Nursing is my favorite subject. 护理是我最喜欢的学科。｜-ject- 投（sub-下→置于其下）
+project /ˈprɒdʒekt/	n. 项目、课题	We finished the project. 我们完成了项目。｜pro-（向前）+ ject（投）→ 投出去的规划
+# G08 -duce-/-duct-（引导）
+# @tag 层级::掌握级 词根::G08
+produce /prəˈdjuːs/	v. 生产	The factory produces masks. 这家工厂生产口罩。｜-duce- 引导（pro-向前→引出）
+reduce /rɪˈdjuːs/	v. 减少	This medicine reduces pain. 这药能减轻疼痛。｜-duce- 引导（re-回→引回去）※
+introduce /ˌɪntrəˈdjuːs/	v. 介绍	Let me introduce myself. 让我自我介绍一下。｜-duce- 引导（intro-向内→引进来）
+conduct /kənˈdʌkt/	v. 实施、进行	They conducted a health survey. 他们做了一次健康调查。｜-duct- 引导（con-一起）
+product /ˈprɒdʌkt/	n. 产品	This product sells well. 这产品很畅销。｜pro-（向前）+ duct（引）→ 引出来的成品※
+education /ˌedʒuˈkeɪʃn/	n. 教育	She works in education. 她从事教育工作。｜e-（出）+ duc（引）→ 引出才智
+# G09 -pose-（放、置）
+# @tag 层级::掌握级 词根::G09
+compose /kəmˈpəʊz/	v. 组成	The team is composed of ten nurses. 这个团队由十名护士组成。｜-pose- 放（com-一起→放在一起）
+expose /ɪkˈspəʊz/	v. 暴露	Do not expose the wound to air. 别把伤口暴露在空气中。｜-pose- 放（ex-外→放到外面）※
+suppose /səˈpəʊz/	v. 认为、假设	I suppose he is right. 我认为他是对的。｜-pose- 放（sup-下→暂且放下想法）
+oppose /əˈpəʊz/	v. 反对	They oppose the new rule. 他们反对这项新规定。｜-pose- 放（ob-相反→对着放）
+purpose /ˈpɜːpəs/	n. 目的	What is the purpose of this test? 这项检查的目的是什么？｜pur-（向前）+ pose（放）→ 先摆好的目标※
+position /pəˈzɪʃn/	n. 位置、职位	Put the patient in a comfortable position. 让病人处于舒适的体位。｜posit（放）+ -ion → 放的地方※
+# G10 -mit-/-miss-（送、放）
+# @tag 层级::掌握级 词根::G10
+permit /pəˈmɪt/	v. 允许	Visitors are not permitted here. 这里不允许访客进入。｜-mit- 送（per-通过→放行）
+admit /ədˈmɪt/	v. 承认；收治入院	He was admitted to hospital. 他被收治入院。｜-mit- 送（ad-去→送进去）※
+submit /səbˈmɪt/	v. 提交	Submit your report today. 今天把你的报告交上来。｜-mit- 送（sub-下→呈上去）
+commit /kəˈmɪt/	v. 承诺、犯（错）	She committed herself to nursing. 她投身护理工作。｜-mit- 送（com-一起→交托出去）
+mission /ˈmɪʃn/	n. 任务、使命	The nurse completed her mission. 护士完成了她的任务。｜miss（送）+ -ion → 被派出去的差事
+admission /ədˈmɪʃn/	n. 准入、入院	Hospital admission was quick. 入院很快。｜ad-（去）+ miss（送）→ 送进去※
+# G11 -fer-（带、拿）
+# @tag 层级::掌握级 词根::G11
+transfer /trænsˈfɜː/	v. 转移、转院	Transfer the patient to the ICU. 把病人转到重症监护室。｜-fer- 带（trans-转移）※
+prefer /prɪˈfɜː/	v. 更喜欢	I prefer tea to coffee. 比起咖啡我更喜欢茶。｜-fer- 带（pre-先→先拿起来）
+refer /rɪˈfɜː/	v. 参考、转诊	Refer to the handbook. 参见手册。｜-fer- 带（re-回→带回出处）
+offer /ˈɒfə/	v./n. 提供	The hospital offers free advice. 这家医院提供免费咨询。｜-fer- 带（of-靠近→带到面前）※
+suffer /ˈsʌfə/	v. 遭受、患（病）	He suffers from a cold. 他患了感冒。｜-fer- 带（suf-下→在下面承受）※
+reference /ˈrefrəns/	n./v. 参考	Refer to the reference book. 参考那本参考书。｜re-（回）+ fer（带）→ 带回去查※
+conference /ˈkɒnfərəns/	n. 会议	The conference starts at nine. 会议九点开始。｜con-（一起）+ fer（带）→ 带到一起商议
+# G12 -tain-（保持、持有）
+# @tag 层级::掌握级 词根::G12
+maintain /meɪnˈteɪn/	v. 维持	Maintain a healthy diet. 保持健康的饮食。｜-tain- 保持（main-手→用手握住）※
+obtain /əbˈteɪn/	v. 获得	He obtained a nursing certificate. 他取得了护理证书。｜-tain- 持有（ob-加强）
+contain /kənˈteɪn/	v. 包含	This food contains sugar. 这种食物含糖。｜-tain- 持有（con-一起→装在里面）
+retain /rɪˈteɪn/	v. 保留	The body retains water. 身体会潴留水分。｜-tain- 保持（re-回→留下来）※
+certain /ˈsɜːtn/	adj. 确定的	I am certain he will recover. 我确信他会康复。｜cert（确定）→ 拿得住的※
+
+# ============ 第二批：扩展词根 G13–G30 ============
+# G13 -sist-（站）
+# @tag 层级::掌握级 词根::G13
+insist /ɪnˈsɪst/	v. 坚持	She insisted on leaving. 她坚持要走。｜-sist- 站（in-上→站在那不动）
+resist /rɪˈzɪst/	v. 抵抗	The body resists infection. 身体抵抗感染。｜-sist- 站（re-反→对着站）※
+persist /pəˈsɪst/	v. 坚持（持续）	He persisted in studying. 他坚持学习。｜-sist- 站（per-完全→一直站着）
+assist /əˈsɪst/	v. 协助	Assist the doctor in the operation. 协助医生做手术。｜-sist- 站（as-去→站到旁边）※
+exist /ɪɡˈzɪst/	v. 存在	Does life exist on other planets? 其他星球上有生命吗？｜ex-（出）+ sist（站）→ 站出来→存在
+assistant /əˈsɪstənt/	n. 助手	The doctor and his assistant came in. 医生和他的助手进来了。｜assist + -ant → 站在旁侧的人※
+# G14 -dict-（说）
+# @tag 层级::掌握级 词根::G14
+predict /prɪˈdɪkt/	v. 预测	No one can predict the result. 没人能预测结果。｜-dict- 说（pre-先→先说）
+dictation /dɪkˈteɪʃn/	n. 听写	We have a dictation today. 今天有听写。｜-dict- 说
+dictionary /ˈdɪkʃənri/	n. 词典	Look it up in the dictionary. 查一下词典。｜-dict- 说（说词的书）
+# G15 -scribe-/-script-（写）
+# @tag 层级::掌握级 词根::G15
+describe /dɪˈskraɪb/	v. 描述	Describe your symptoms. 描述一下你的症状。｜-scribe- 写（de-下→写下来）※
+prescribe /prɪˈskraɪb/	v. 开处方	The doctor prescribed some pills. 医生开了些药。｜-scribe- 写（pre-先→事先写好）※
+prescription /prɪˈskrɪpʃn/	n. 处方	Take this prescription to the pharmacy. 拿这张处方去药房。｜-script- 写 ※
+# G16 -tract-（拉）
+# @tag 层级::掌握级 词根::G16
+attract /əˈtrækt/	v. 吸引	The job attracts many students. 这工作吸引了很多学生。｜-tract- 拉（at-去→拉过去）
+extract /ɪkˈstrækt/	v. 拔出、提取	The dentist extracted the tooth. 牙医拔掉了那颗牙。｜-tract- 拉（ex-出→拉出来）※
+contract /ˈkɒntrækt/	n. 合同；v. 收缩	The muscle contracts in cold water. 肌肉在冷水中会收缩。｜-tract- 拉（con-一起→拉紧）※
+distract /dɪˈstrækt/	v. 使分心	Do not distract the nurse. 别让护士分心。｜-tract- 拉（dis-分开→拉开注意力）
+subtract /səbˈtrækt/	v. 减去	Subtract 5 from 20. 从20里减去5。｜sub-（下）+ tract（拉）→ 拉下来
+# G17 -press-（压）
+# @tag 层级::掌握级 词根::G17
+express /ɪkˈspres/	v. 表达	Express your feelings. 表达你的感受。｜-press- 压（ex-出→压出来）
+impress /ɪmˈpres/	v. 使印象深刻	Her skill impressed me. 她的技术让我印象深刻。｜-press- 压（im-上→压印上去）
+compress /kəmˈpres/	v. 压缩、压迫	Compress the wound with a bandage. 用绷带压迫伤口。｜-press- 压（com-一起→压紧）※
+depress /dɪˈpres/	v. 使沮丧、压下	The news depressed him. 这个消息让他沮丧。｜-press- 压（de-下→压下去）
+pressure /ˈpreʃə/	n. 压力	Take his blood pressure. 量一下他的血压。｜press + -ure → 压的力量※
+# G18 -form-（形状、形成）
+# @tag 层级::掌握级 词根::G18
+inform /ɪnˈfɔːm/	v. 通知	Inform the doctor at once. 立刻通知医生。｜-form- 形成（in-内→使心里成形）※
+reform /rɪˈfɔːm/	v./n. 改革	They reformed the system. 他们改革了制度。｜-form- 形成（re-重新）
+transform /trænsˈfɔːm/	v. 转变	The town transformed greatly. 这个镇子变化很大。｜-form- 形状（trans-改变）
+uniform /ˈjuːnɪfɔːm/	n. 制服	Nurses wear white uniforms. 护士穿白色制服。｜-form- 形状（uni-单一→统一形状）※
+perform /pəˈfɔːm/	v. 执行、做	Perform CPR carefully. 认真做心肺复苏。｜-form- 形成（per-完全→完成）※
+information /ˌɪnfəˈmeɪʃn/	n. 信息	I need more information. 我需要更多信息。｜inform + -ation → 告知的内容※
+# G19 -vid-/-vis-（看）
+# @tag 层级::掌握级 词根::G19
+advice /ədˈvaɪs/	n. 建议（不可数）	Let me give you some advice. 我给你一些建议。｜-vis- 看→看法→建议
+advise /ədˈvaɪz/	v. 建议	I advise you to rest. 我建议你休息。｜-vis- 看（ad-去→给出看法）
+visit /ˈvɪzɪt/	v./n. 拜访、看望	The doctor visits patients daily. 医生每天查房。｜-vis- 看（去看望）※
+revise /rɪˈvaɪz/	v. 复习、修订	Revise your notes before the exam. 考前把笔记复习一遍。｜-vis- 看（re-再→再看一遍）
+provide /prəˈvaɪd/	v. 提供	The school provides free books. 学校免费提供书本。｜-vid- 看（pro-前→预见而备好）
+visible /ˈvɪzəbl/	adj. 可见的	The wound is visible. 伤口是可见的。｜vis（看）+ -ible → 看得见的
+television /ˈtelɪvɪʒn/	n. 电视	We watch television in the evening. 我们晚上看电视。｜tele-（远）+ vis（看）→ 看远方
+# G20 -rupt-（断裂）
+# @tag 层级::掌握级 词根::G20
+interrupt /ˌɪntəˈrʌpt/	v. 打断	Do not interrupt the doctor. 别打断医生说话。｜-rupt- 断（inter-中间→中间断开）
+erupt /ɪˈrʌpt/	v. 突然发生、爆发	A rash erupted on his arm. 他手臂上突然起了皮疹。｜-rupt- 断（e-出→破出来）※
+abrupt /əˈbrʌpt/	adj. 突然的	The change was abrupt. 变化很突然。｜-rupt- 断（ab-离开→断开）
+# G21 -struct-（建造）
+# @tag 层级::掌握级 词根::G21
+construct /kənˈstrʌkt/	v. 建造	They constructed a new hospital. 他们建了一所新医院。｜-struct- 建（con-一起→搭起来）
+instruct /ɪnˈstrʌkt/	v. 指导	The nurse instructed the patient. 护士指导了病人。｜-struct- 建（in-内→在心里搭建）※
+structure /ˈstrʌktʃə/	n. 结构	the structure of the heart 心脏的结构 ｜-struct- 建 ※
+construction /kənˈstrʌkʃn/	n. 建设	The hospital is under construction. 医院正在建设中。｜con-（一起）+ struct（建）→ 搭起来
+destruction /dɪˈstrʌkʃn/	n. 破坏	The destruction was terrible. 破坏很严重。｜de-（向下）+ struct（建）→ 拆掉※
+# G22 -spir-（呼吸）
+# @tag 层级::掌握级 词根::G22
+inspire /ɪnˈspaɪə/	v. 鼓舞、启发	Her story inspired me. 她的故事鼓舞了我。｜-spir- 呼吸（in-入→吸入力量）
+respiration /ˌrespəˈreɪʃn/	n. 呼吸	Respiration is 16 to 20 times a minute. 呼吸每分钟16到20次。｜-spir- 呼吸 ※
+expire /ɪkˈspaɪə/	v. 到期、呼气	The medicine expired last month. 这药上个月过期了。｜-spir- 呼吸（ex-出→气出尽）※
+spirit /ˈspɪrɪt/	n. 精神	Team spirit is important. 团队精神很重要。｜spir（呼吸）→ 那股气※
+# G23 -vit-/-viv-（生命）
+# @tag 层级::掌握级 词根::G23
+vital /ˈvaɪtl/	adj. 至关重要的	Check the vital signs first. 先检查生命体征。｜-vit- 生命 ※
+vitamin /ˈvɪtəmɪn/	n. 维生素	Fruit is rich in vitamins. 水果富含维生素。｜-vit- 生命
+survive /səˈvaɪv/	v. 幸存、存活	Few survived the accident. 事故中很少有人活下来。｜-viv- 活（sur-超过→活过来）
+revive /rɪˈvaɪv/	v. 苏醒、复苏	The doctors revived him. 医生把他救醒了。｜re-（再）+ viv（活）→ 又活了※
+# G24 -med-/-medi-（医治、中间）
+# @tag 层级::掌握级 词根::G24
+medical /ˈmedɪkl/	adj. 医学的	Read the medical record. 看一下病历。｜-med- 医治 ※
+medicine /ˈmedsn/	n. 药、医学	Take the medicine twice a day. 这药一天服两次。｜-med- 医治 ※
+immediate /ɪˈmiːdiət/	adj. 立即的	Give immediate care to the patient. 立即对病人施救。｜-med- 中间（im-无→没有间隔）※
+medium /ˈmiːdiəm/	adj./n. 中等的	a woman of medium height 一位中等身材的女性 ｜-med- 中间
+remedy /ˈremədi/	n. 疗法、药物	Honey is a good remedy for a cough. 蜂蜜是治咳嗽的好偏方。｜re-（回）+ med（医治）→ 医回来的办法※
+# G25 meter（测量）/ -therm-（热）
+# @tag 层级::掌握级 词根::G25
+thermometer /θəˈmɒmɪtə/	n. 体温计	Read the thermometer carefully. 仔细读体温计。｜therm 热 + meter 测量 ※
+centimeter /ˈsentɪmiːtə/	n. 厘米	The wound is 3 centimeters long. 伤口有三厘米长。｜meter 测量（centi-百分之一）※
+temperature /ˈtemprətʃə/	n. 温度、体温	Take his temperature. 量一下他的体温。｜temper 调节、度量 ※
+# G26 -path-（病、感觉）
+# @tag 层级::掌握级 词根::G26
+patient /ˈpeɪʃnt/	n. 病人；adj. 耐心的	The patient needs rest. 这位病人需要休息。｜-path- 病、受苦 ※
+sympathy /ˈsɪmpəθi/	n. 同情	I feel sympathy for her. 我很同情她。｜-path- 感觉（sym-共同→同感）
+empathy /ˈempəθi/	n. 共情、同理心	A nurse needs empathy. 护士需要同理心。｜em-（入）+ path（感觉）→ 进入对方的感受※
+# G27 -log-（说、学问）
+# @tag 层级::掌握级 词根::G27
+dialogue /ˈdaɪəlɒɡ/	n. 对话	Read the dialogue aloud. 大声朗读这段对话。｜-log- 说（dia-两者之间）
+apology /əˈpɒlədʒi/	n. 道歉	Please accept my apology. 请接受我的道歉。｜-log- 说（apo-离开→解释开脱）
+technology /tekˈnɒlədʒi/	n. 技术	Medical technology saves lives. 医疗技术拯救生命。｜-log- 学问（techno-技艺）※
+biology /baɪˈɒlədʒi/	n. 生物（学）	Biology is my favorite subject. 生物是我最喜欢的学科。｜bio-（生命）+ logy（学问）
+# G28 -ply-/-ple-（折、满）
+# @tag 层级::掌握级 词根::G28
+apply /əˈplaɪ/	v. 申请、涂抹	Apply the cream to the skin. 把药膏涂在皮肤上。｜-ply- 折（ap-去→折贴上去）※
+supply /səˈplaɪ/	v./n. 供应	They supply clean water. 他们供应干净的水。｜-ply- 满（sup-下→从下填满）
+reply /rɪˈplaɪ/	v./n. 回复	Please reply soon. 请尽快回复。｜-ply- 折（re-回→折回来）
+complete /kəmˈpliːt/	v. 完成；adj. 完整的	Complete the form first. 先把这张表填完。｜-ple- 满（com-完全→填满）
+multiply /ˈmʌltɪplaɪ/	v. 乘以	Multiply 3 by 4. 3乘以4。｜multi-（多）+ ply（折）→ 折很多次
+imply /ɪmˈplaɪ/	v. 暗示	His words imply a risk. 他的话暗示有风险。｜im-（内）+ ply（折）→ 折在话里
+# G29 -mov-/-mot-/-mob-（动）
+# @tag 层级::掌握级 词根::G29
+move /muːv/	v. 移动	Do not move the patient. 别移动这位病人。｜-mov- 动 ※
+remove /rɪˈmuːv/	v. 移除、脱下	Remove the bandage gently. 轻轻拆掉绷带。｜-mov- 动（re-回→移走）※
+motor /ˈməʊtə/	n. 发动机、马达	The motor stopped suddenly. 发动机突然停了。｜-mot- 动
+mobile /ˈməʊbaɪl/	adj. 可移动的	a mobile phone 手机 ｜-mob- 动
+promote /prəˈməʊt/	v. 促进、提升	Exercise promotes health. 锻炼促进健康。｜-mot- 动（pro-向前→往前推）※
+movement /ˈmuːvmənt/	n. 运动	He lost movement in his arm. 他的手臂不能动了。｜move + -ment※
+motion /ˈməʊʃn/	n. 运动	The train is in motion. 火车在行驶中。｜mot（动）+ -ion
+# G30 -val-/-vail-（价值、力量）
+# @tag 层级::掌握级 词根::G30
+value /ˈvæljuː/	n. 价值	This advice is of great value. 这个建议很有价值。｜-val- 价值
+valid /ˈvælɪd/	adj. 有效的	This ticket is valid for a week. 这张票一周内有效。｜-val- 强→有效力
+available /əˈveɪləbl/	adj. 可获得的、有空的	Is a doctor available now? 现在有医生吗？｜-vail- 有用→可用 ※
+evaluate /ɪˈvæljueɪt/	v. 评估	Doctors evaluate the patient's condition. 医生评估病人的情况。｜e-（出）+ valu（价值）→ 估出分量※
+valuable /ˈvæljuəbl/	adj. 有价值的	This is valuable experience. 这是宝贵的经验。｜valu + -able → 有价值的
+
+# ============ 形近 / 近义辨析专项 D01–D10（单招高频考点）============
+# D01 借
+borrow /ˈbɒrəʊ/	v. 借入	May I borrow your pen? 我能借你的笔吗？｜辨析：borrow 借入（borrow sth from sb）
+lend /lend/	v. 借出	He lent me his bike. 他把自行车借给了我。｜辨析：lend 借出（lend sth to sb）
+keep /kiːp/	v. 保留、借用（多久）	You can keep the book for a week. 这本书你可以借一周。｜辨析：keep 回答 how long，表示借用多久
+# D02 升、起
+rise /raɪz/	vi. 上升（不及物）	The sun rises in the east. 太阳从东方升起。｜辨析：rise 自身上升，不接宾语（rise-rose-risen）
+raise /reɪz/	vt. 举起、提高、饲养（及物）	They raise cows on the farm. 他们在农场养牛。｜辨析：raise 须接宾语，是「使……上升」
+arise /əˈraɪz/	vi. 出现、发生（抽象）	A problem arose. 出现了一个问题。｜辨析：arise 多指问题、情况出现（arise-arose-arisen）
+# D03 躺 / 撒谎 / 放置（三态易混）
+lie（躺） /laɪ/	vi. 躺、位于	The book lies on the desk. 书在桌上。｜辨析：躺 lie-lay-lain
+lie（撒谎） /laɪ/	vi. 撒谎	Do not lie to me. 别对我撒谎。｜辨析：撒谎 lie-lied-lied
+lay /leɪ/	vt. 放置、下蛋	She laid the book down. 她把书放下了。｜辨析：放置 lay-laid-laid（及物，须接宾语）
+# D04 花费四兄弟
+spend /spend/	v. 花费（人作主语）	I spent two hours reading. 我花了两小时阅读。｜辨析：人 spend 时间/钱 on sth 或 (in) doing
+take /teɪk/	v. 花费（it 作主语）	It takes an hour to get there. 到那里要一小时。｜辨析：It takes (sb) 时间 to do sth
+cost /kɒst/	v. 花费（物作主语）	The book costs 20 yuan. 这本书20元。｜辨析：物 cost (sb) 钱
+pay /peɪ/	v. 付款（人作主语）	I paid for the meal. 我付了饭钱。｜辨析：人 pay (钱) for sth
+# D05 少（可数/不可数 × 肯定/否定）
+few /fjuː/	adj. 很少（表否定，接可数）	Few students passed. 没几个学生及格。｜辨析：few = 几乎没有，接可数复数
+a few /ə fjuː/	一些（表肯定，接可数）	I have a few friends. 我有几个朋友。｜辨析：a few = 有几个，接可数复数
+little /ˈlɪtl/	adj. 很少（表否定，接不可数）	There is little water. 没什么水了。｜辨析：little = 几乎没有，接不可数
+a little /ə ˈlɪtl/	一些（表肯定，接不可数）	Add a little sugar. 加一点糖。｜辨析：a little = 有一点，接不可数
+# D06 之间
+among /əˈmʌŋ/	prep. 在……之中（三者及以上）	He is popular among students. 他在学生中很受欢迎。｜辨析：among 用于三者或以上
+between /bɪˈtwiːn/	prep. 在……之间（两者）	The shop is between two banks. 商店在两家银行之间。｜辨析：between 用于两者（或 between A and B）
+# D07 听与说
+hear /hɪə/	v. 听见（强调结果）	I heard a noise. 我听见一声响。｜辨析：hear 强调「听到」的结果，不加 to
+listen /ˈlɪsn/	v. 听（强调动作）	Listen to the teacher. 听老师讲。｜辨析：listen 强调「听」的动作，须加 to
+speak /spiːk/	v. 说（语言）、发言	She speaks English well. 她英语说得很好。｜辨析：speak 接语言，或作发言
+say /seɪ/	v. 说（强调内容）	He said hello to me. 他跟我打了个招呼。｜辨析：say 后接说的内容，或 say to sb
+talk /tɔːk/	v. 交谈	They talked for an hour. 他们聊了一小时。｜辨析：talk 强调双向交谈，常接 to/with/about
+tell /tel/	v. 告诉、讲述	Tell me the truth. 告诉我真相。｜辨析：tell 后接「人」，tell sb sth
+# D08 形近词对比
+though /ðəʊ/	conj. 虽然	Though tired, he kept working. 虽然很累，他仍在工作。｜形近：though = 虽然
+through /θruː/	prep. 穿过	We walked through the park. 我们穿过公园。｜形近：through = 穿过
+quiet /ˈkwaɪət/	adj. 安静的	The library is quiet. 图书馆很安静。｜形近：quiet = 安静（quie-）
+quite /kwaɪt/	adv. 相当	It is quite cold today. 今天相当冷。｜形近：quite = 相当
+aloud /əˈlaʊd/	adv. 出声地	Please read aloud. 请出声朗读。｜形近：aloud 强调「发出声音」
+loud /laʊd/	adj./adv. 大声的/地	The music is too loud. 音乐太吵了。｜形近：loud 强调「音量大」
+lonely /ˈləʊnli/	adj. 孤独的（主观感受）	He feels lonely at home. 他在家感到孤独。｜形近：lonely 强调主观上的孤独感
+alone /əˈləʊn/	adj./adv. 独自（客观状态）	She lives alone. 她独自居住。｜形近：alone 只说明客观上一人，无感情色彩
+beside /bɪˈsaɪd/	prep. 在……旁边	She sat beside me. 她坐在我旁边。｜形近：beside 无 s = 在旁边
+besides /bɪˈsaɪdz/	adv./prep. 此外、除……之外（还）	Besides English, he learns Japanese. 除英语外他还学日语。｜形近：besides 有 s = 此外、除……之外还
+# D09 伤害程度递进
+wound /wuːnd/	n./v. 伤、受伤（多指刀枪等外伤）	He wounded his arm. 他伤了手臂。｜辨析：wound 多指利器、枪械造成的外伤
+hurt /hɜːt/	v. 使疼痛、伤害（也可指情感）	My leg hurts. 我的腿疼。｜辨析：hurt 最常用，身体疼痛或情感伤害都可
+injure /ˈɪndʒə/	v. 受伤（多指意外事故）	He injured his knee. 他伤了膝盖。｜辨析：injure 多指意外、事故中受伤
+damage /ˈdæmɪdʒ/	v./n. 损坏（部分，可修复）	The storm damaged the roof. 暴风雨损坏了屋顶。｜辨析：damage 是部分损坏，还能修
+destroy /dɪˈstrɔɪ/	v. 摧毁（彻底，不可修复）	The fire destroyed the house. 大火烧毁了房屋。｜辨析：destroy 是彻底毁坏，无法复原
+# D10 其他高频
+discover /dɪsˈkʌvə/	v. 发现（原本就存在）	Columbus discovered America. 哥伦布发现了美洲。｜辨析：discover 发现已有之物（对比 invent 发明新事物）
+manage /ˈmænɪdʒ/	v. 设法做成、管理	She managed to escape. 她设法逃了出来。｜搭配：manage to do 设法做成（强调成功）

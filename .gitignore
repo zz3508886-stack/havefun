@@ -18,3 +18,18 @@ local-notes/
 web/results.json
 web/config.json
 web/__pycache__/
+
+# 复习管理系统（app/）运行时数据与本机配置
+app/config.json
+app/data/
+app/backend/.venv/
+app/frontend/node_modules/
+app/frontend/dist/
+
+# dev-loop 过程记忆（context/ 入库，CURRENT 与锁文件除外）
+context/CURRENT
+context/**/*.bp.lock
+
+# 构建与测试缓存
+.pytest_cache/
+*.tsbuildinfo

@@ -1,0 +1,14 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8000
+  },
+  "ai": {
+    "enabled": false,
+    "base_url": "",
+    "api_key": "",
+    "model": "",
+    "timeout": 30
+  },
+  "ai_access_token": ""
+}
