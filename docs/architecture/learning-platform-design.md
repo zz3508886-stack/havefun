@@ -28,7 +28,7 @@ updated: 2026-10-23
 
 单机单人场景的显式简化：不做账号体系（表结构预留 `user_id` 备用）、不开 CORS、不上容器。React 的 Node 只是构建链，不常驻服务——编译产物由 Python 托管，省一套运行时运维。
 
-Windows 落地要点：`start.ps1` 一键（py launcher 建 venv → 装依赖 → 起后端，前端另行 `npm run dev`）；启动脚本用 `.ps1`/`.bat` 不用 `.sh`；Python ≥ 3.11、Node LTS 20/22，版本由 `requirements.txt` 与 `package-lock.json` 锁定；所有文件读写显式 `utf-8`。
+Windows 落地要点：`start.py` 跨平台一键启动器（查找 Python → 建 venv → 装依赖 → 按需构建前端 → 起后端），普通用户双击 `启动服务.bat`（macOS/Linux 用 `启动服务.sh`），`start.ps1` 为兼容薄包装，用户引导见 `app/启动说明.md`；Python ≥ 3.11、Node LTS 20/22，版本由 `requirements.txt` 与 `package-lock.json` 锁定；所有文件读写显式 `utf-8`。
 
 ## 三层模型
 
