@@ -9,6 +9,7 @@ from __future__ import annotations
 import sqlite3
 
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import __version__
@@ -18,6 +19,46 @@ from .quiz import router as quiz_router
 from .feedback import router as feedback_router
 
 DIST_DIR = APP_ROOT / "frontend" / "dist"
+
+NO_FRONTEND_HTML = """<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>复习管理系统 · 网页界面未构建</title>
+<style>
+  body{{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+       background:#f4f6fb;font-family:"Microsoft YaHei",system-ui,sans-serif;color:#2b3245;}}
+  .card{{max-width:560px;margin:24px;padding:32px 36px;background:#fff;border-radius:14px;
+        box-shadow:0 8px 30px rgba(31,45,84,.10);}}
+  h1{{font-size:20px;margin:0 0 8px;}}
+  p{{line-height:1.7;margin:8px 0;font-size:14px;}}
+  .badge{{display:inline-block;padding:2px 10px;border-radius:999px;background:#eef2ff;
+         color:#4a5bd0;font-size:12px;margin-bottom:14px;}}
+  ol{{line-height:1.9;font-size:14px;padding-left:22px;margin:12px 0;}}
+  code{{background:#f1f3f8;border-radius:4px;padding:1px 6px;font-size:13px;}}
+  .tip{{margin-top:18px;padding-top:14px;border-top:1px dashed #e3e7f2;font-size:13px;color:#6b7488;}}
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="badge">后端服务正常运行</span>
+  <h1>网页界面尚未构建</h1>
+  <p>后端接口服务已经正常启动（<code>/api/health</code> 可访问），但前端网页需要 Node.js 才能构建，
+     当前系统未检测到 Node.js，因此浏览器打不开复习页面。</p>
+  <p>解决办法（约 3 分钟）：</p>
+  <ol>
+    <li>到 <a href="https://nodejs.org/">https://nodejs.org/</a> 下载安装 <b>Node.js LTS 20 或 22</b>；</li>
+    <li>装好后<b>关闭当前命令行窗口</b>；</li>
+    <li>重新双击 <code>启动服务.bat</code>，窗口会自动构建前端并打开页面。</li>
+  </ol>
+  <div class="tip">
+    临时替代：仓库中的旧版网页刷题服务 <code>web/启动服务.bat</code> 只用 Python 标准库，
+    无需安装 Node.js，双击即可使用（功能较简）。
+  </div>
+</div>
+</body>
+</html>"""
 
 
 def create_app() -> FastAPI:
@@ -50,6 +91,11 @@ def create_app() -> FastAPI:
     # 显式路由先注册，静态挂载兜底——/api/* 永远优先生效
     if DIST_DIR.is_dir():
         app.mount("/", StaticFiles(directory=str(DIST_DIR), html=True), name="frontend")
+    else:
+        # 未构建前端时给中文指引页，而不是裸的 {"detail":"Not Found"}
+        @app.get("/{full_path:path}", include_in_schema=False)
+        def no_frontend(full_path: str) -> HTMLResponse:
+            return HTMLResponse(NO_FRONTEND_HTML)
 
     return app
 

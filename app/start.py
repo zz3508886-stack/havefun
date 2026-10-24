@@ -63,10 +63,23 @@ def install_deps(venv_exe):
     log("[3/4] 正在安装后端依赖（首次约 1 至 3 分钟）...")
     cmd = [str(venv_exe), "-m", "pip", "install", "-r", str(req), "--quiet"]
     if run(cmd) != 0:
-        log("      安装失败，尝试修复 pip 后重试一次...")
-        subprocess.run([str(venv_exe), "-m", "ensurepip", "--upgrade"], capture_output=True)
+        log("      安装失败，尝试升级 pip 后重试一次...")
+        subprocess.run([str(venv_exe), "-m", "pip", "install", "--upgrade", "pip"], capture_output=True)
         if run(cmd) != 0:
-            sys.exit("依赖安装失败：请检查网络连通性后重试，详见《启动说明.md》第六节。")
+            sys.exit("依赖安装失败。常见原因：\n"
+                     "      1. 网络不通：检查网络连通性后重新双击启动；\n"
+                     "      2. 报错含 Microsoft Visual C++ 或 Failed building wheel："
+                     "当前 Python 版本过新，缺少现成安装包，需要本地编译；\n"
+                     "         建议改装 Python 3.12 或 3.13，删除 app/backend/.venv 后重新双击启动。\n"
+                     "      详见《启动说明.md》第六节。")
+
+
+def build_index(venv_exe):
+    """启动前增量构建文档索引。按内容哈希判断，未改动的文件会跳过，通常不到 1 秒。"""
+    log("      正在构建文档索引（题库 / 疑难点 / 知识点梳理 / 节点安排）...")
+    cmd = [str(venv_exe), "-m", "app.indexer"]
+    if run(cmd, cwd=BACKEND) != 0:
+        log("      索引构建失败：不影响启动；可进入 backend 目录执行 python -m app.indexer 重试。")
 
 
 def newest_mtime(root):
@@ -167,6 +180,7 @@ def main():
     log(f"[1/4] 使用 Python：{py}")
     venv_exe = ensure_venv(py)
     install_deps(venv_exe)
+    build_index(venv_exe)
     if args.skip_frontend:
         log("[4/4] 已按参数跳过前端构建")
     else:

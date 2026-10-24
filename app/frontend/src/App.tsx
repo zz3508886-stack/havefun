@@ -1,6 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Key } from 'react'
-import { Alert, Empty, Input, Layout, Spin, Tabs, Tree, Typography, message } from 'antd'
+import {
+  Alert,
+  Button,
+  Empty,
+  Input,
+  Layout,
+  Spin,
+  Tabs,
+  Tree,
+  Typography,
+  message,
+} from 'antd'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import type { DataNode } from 'antd/es/tree'
 import { api } from './api'
 import QuizView from './QuizView'
@@ -127,16 +139,31 @@ export default function App() {
   const [tab, setTab] = useState<'quiz' | 'wrong'>('quiz')
   const [set, setCurrentSet] = useState<QuizSet | null>(null)
   const [resp, setResp] = useState<SubmitResponse | null>(null)
-  const [collapsed, setCollapsed] = useState(false)
   const [wrongPaper, setWrongPaper] = useState<{
     title: string
     questions: Question[]
     items: WrongPaperItem[]
   } | null>(null)
 
+  const [collapsed, setCollapsed] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('sider-collapsed') === '1'
+    } catch {
+      return false // 隐私模式等取不到 localStorage 时按展开处理
+    }
+  })
+  useEffect(() => {
+    try {
+      localStorage.setItem('sider-collapsed', collapsed ? '1' : '0')
+    } catch {
+      /* 存储失败不影响折叠功能 */
+    }
+  }, [collapsed])
+
   const startQuiz = (s: QuizSet) => {
     setCurrentSet(s)
     setResp(null)
+    setTab('quiz') // 从错题本点套题时切回做题页，避免出现“选中的是做题内容、页签却是错题本”
   }
   const backHome = () => {
     setCurrentSet(null)
@@ -208,24 +235,30 @@ export default function App() {
 
   return (
     <Layout style={{ height: '100vh' }}>
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
+      <Header style={{ display: 'flex', alignItems: 'center', gap: 12, paddingInline: 16 }}>
+        <Button
+          type="text"
+          aria-label={collapsed ? '展开侧边栏' : '折叠侧边栏'}
+          title={collapsed ? '展开侧边栏' : '折叠侧边栏'}
+          onClick={() => setCollapsed((c) => !c)}
+          style={{ color: '#fff' }}
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        />
         <Title level={4} style={{ color: '#fff', margin: 0 }}>
           复习管理系统
         </Title>
       </Header>
       <Layout style={{ flex: 1, minHeight: 0 }}>
-        {tab === 'quiz' ? (
-          <Sider
-            width={280}
-            collapsible
-            collapsed={collapsed}
-            onCollapse={setCollapsed}
-            theme="light"
-            style={{ borderRight: '1px solid #f0f0f0' }}
-          >
-            <SetsTree onPick={startQuiz} />
-          </Sider>
-        ) : null}
+        <Sider
+          width={280}
+          collapsedWidth={0}
+          collapsed={collapsed}
+          trigger={null}
+          theme="light"
+          style={{ borderRight: '1px solid #f0f0f0' }}
+        >
+          <SetsTree onPick={startQuiz} />
+        </Sider>
         <Content style={{ padding: 24, overflow: 'auto' }}>
           <Tabs
             activeKey={tab}
