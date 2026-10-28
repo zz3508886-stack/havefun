@@ -19,9 +19,9 @@ from pathlib import Path
 from .ai_grader import make_ai_grader
 from .config import load_config
 from .db import connect
-from .grading import OBJECTIVE_TYPES, GradedQuestion, grade_set
+from .grading import GradedQuestion, grade_set
 from .indexer import REPO_ROOT
-from .parser import Question, parse_explanations
+from .parser import Question, is_objective_question, parse_explanations
 from .writeback import PreCheckError, WriteConflict, write_back
 
 router = APIRouter(prefix="/api/quiz", tags=["quiz"])
@@ -60,7 +60,18 @@ def review(req: ReviewRequest) -> dict:
         conn.close()
     if updated == 0:
         raise HTTPException(status_code=404, detail="未找到该待复核记录（可能已复核或批次不符）")
-    return {"ok": True, "qid": req.qid, "is_correct": req.is_correct, "updated": updated}
+
+    # P9：复核会翻转对错 → 可能新增/消除错题册条目，刷新导出视图（best-effort）
+    from .exporter import safe_export
+
+    wrongbook_export = safe_export("wrongbook")
+    return {
+        "ok": True,
+        "qid": req.qid,
+        "is_correct": req.is_correct,
+        "updated": updated,
+        "wrongbook_export": wrongbook_export,
+    }
 
 
 class SubmitRequest(BaseModel):
@@ -165,7 +176,7 @@ def _to_results(graded, qmeta: dict, expl_map: dict) -> list[dict]:
             "explanation": expl_map.get((fp, r.qid), "") if q else "",
         }
         # 仅客观题在判定后回传正确答案（判分结果，非预下发答案键）
-        if r.q_type in OBJECTIVE_TYPES and r.is_correct is not None:
+        if q is not None and is_objective_question(q) and r.is_correct is not None:
             item["correct_answer"] = r.key_answer
         out.append(item)
     return out
@@ -227,6 +238,20 @@ def submit(req: SubmitRequest) -> dict:
     except PreCheckError as exc:
         payload["writeback"] = "precheck_failed"
         payload["warning"] = "回写内容未通过校验器检查，已跳过写入"
+    except ValueError as exc:
+        # 章节名不含标准套题关键词（如摸底卷「概念摸底（A卷）」）→ 不回写，判分照常
+        payload["writeback"] = "skipped"
+        payload["warning"] = f"该章节非标准套题名，跳过回写：{exc}"
+
+    # P9：交卷可能产生新错题 → 刷新错题本导出视图（best-effort，失败不影响交卷）
+    from .exporter import safe_export
+
+    payload["wrongbook_export"] = safe_export("wrongbook")
+
+    # P7：交互后刷新 AI 一页纸快照（best-effort，失败不影响交卷）
+    from .ai import refresh_snapshot
+
+    refresh_snapshot()
     return payload
 
 
@@ -372,7 +397,7 @@ def submit_wrong(req: SubmitWrongRequest) -> dict:
                 "note": r.note,
                 "explanation": expl_map.get((fp, real_qid), ""),
             }
-            if r.q_type in OBJECTIVE_TYPES and r.is_correct is not None:
+            if is_objective_question(qs[i]) and r.is_correct is not None:
                 item["correct_answer"] = r.key_answer
             out.append(item)
             conn.execute(
@@ -393,9 +418,13 @@ def submit_wrong(req: SubmitWrongRequest) -> dict:
         conn.commit()
     finally:
         conn.close()
+    # P9：错题卷同样产生流水 → 刷新错题本导出视图（best-effort）
+    from .exporter import safe_export
+
     return {
         "batch_id": batch_id,
         "results": out,
         "summary": graded.summary,
         "writeback": "skipped",
+        "wrongbook_export": safe_export("wrongbook"),
     }

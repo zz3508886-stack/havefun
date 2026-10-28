@@ -1,9 +1,0 @@
-{
-  "llm": {
-    "enabled": false,
-    "base_url": "https://api.openai.com/v1",
-    "api_key": "你的模型API密钥（如 sk-...）",
-    "model": "gpt-4o-mini",
-    "timeout": 30
-  }
-}

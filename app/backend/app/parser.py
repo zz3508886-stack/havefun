@@ -1,6 +1,7 @@
 """题库 markdown 解析：产出题目结构与答案键。
 
-移植自 web/lib.py 的正则切分逻辑，并落实《总体设计》的 qid 契约：
+移植自初版网页刷题服务（web/，已于 P8 退役，归档见 context/epics）的正则切分逻辑，
+并落实《总体设计》的 qid 契约：
 
 - 显式 ID 优先：题头 ``### 第 N 题（SX-001，选择题，……）`` 中的 ID 直接作 qid，
   与 题库解析.md 按 ID 对应的答案键天然对齐（现有题库已普遍带 SX-/SL- 式 ID）。
@@ -19,8 +20,10 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# --- 题头 / 章节 / 选项 / 答案键 正则（沿用 web/lib.py 已被真实语料验证的写法） ---
-SET_RE = re.compile(r"测验|专项|模拟卷|真题|自测|练习")
+# --- 题头 / 章节 / 选项 / 答案键 正则（沿用初版服务已被真实语料验证的写法） ---
+# 套题章节识别：章节名含这些关键词的二级章节才纳入做题系统
+# （「摸底」覆盖 测验/摸底/ 下的概念摸底 A/B/C 卷）
+SET_RE = re.compile(r"测验|专项|模拟卷|真题|自测|练习|摸底")
 QH_RE = re.compile(r"^###\s*第\s*([0-9]+)\s*题\s*[（(](.*?)[）)]\s*$")
 HEAD_RE = re.compile(r"^#{2,3}\s*(.*?)\s*$")
 OPT_RE = re.compile(r"^\s*[-*]\s*([A-Za-z])\s*[.、]\s*(.*)$")
@@ -28,9 +31,29 @@ ANS_RE = re.compile(r"答案[:：]\s*(.+)")
 ANALYSIS_RE = re.compile(r"解析[:：]")
 ID_INSIDE_RE = re.compile(r"^\s*([A-Za-z0-9\-]+)\s*[，,]\s*([^，,]+?)\s*[，,]\s*(.+)$")
 SUBJECT_RE = re.compile(r"^\|\s*学科\s*\|\s*(.+?)\s*\|\s*$")
+# 解析文档题头：``### SX-MP-001（选择题，【基础｜难度 2】）`` 或裸 ``### HL-MP-001``
+# （括号后缀可选——摸底卷解析多为裸题头，两种形态都要能提出答案键与解析）
+ANALYSIS_HEAD_RE = re.compile(r"^###\s*([A-Za-z0-9\-]+)\s*(?:[（(][^）)]*[）)])?\s*$")
 
 OBJECTIVE_TYPES = {"选择题", "判断题"}
 ERROR_TYPES = ["概念不清", "计算失误", "思路错误", "审题偏差", "知识遗忘"]
+
+
+def is_objective_question(q: Question) -> bool:
+    """是否按客观题判分（脚本精确比对答案键）。
+
+    两类算客观题：
+    1. 标准题型名：选择题 / 判断题；
+    2. 非标准题型名但形态是单选——带 ≥2 个标准选项（A/B/C/D 列表）且答案键
+       为单个字母。摸底卷的「单项选择」「字音·多音字」等细分题型实为单选，
+       按选项比对即可判分；无选项的填空/解答/写作不受影响（答案非单字母
+       或无选项，仍走主观分流）。
+    """
+    if q.q_type in OBJECTIVE_TYPES:
+        return True
+    if len(q.options) < 2:
+        return False
+    return bool(re.fullmatch(r"[A-Z]", (q.answer_key or "").strip()))
 
 
 @dataclass
@@ -179,7 +202,7 @@ def parse_answer_key(analysis_path: Path) -> dict:
     cur_id = None
     cur_answer = ""
     while i < n:
-        m = re.match(r"^###\s*([A-Za-z0-9\-]+)\s*[（(]", lines[i])
+        m = ANALYSIS_HEAD_RE.match(lines[i])
         if m and lines[i].startswith("###"):
             if cur_id is not None:
                 key[cur_id] = cur_answer
@@ -216,7 +239,7 @@ def parse_explanations(analysis_path: Path) -> dict:
     buf: list = []
     in_expl = False
     for line in lines:
-        m = re.match(r"^###\s*([A-Za-z0-9\-]+)\s*[（(]", line)
+        m = ANALYSIS_HEAD_RE.match(line)
         if m:
             if cur_id is not None:
                 expl[cur_id] = _clean_expl("\n".join(buf).strip())

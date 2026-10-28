@@ -15,8 +15,13 @@ from fastapi.staticfiles import StaticFiles
 from . import __version__
 from .config import APP_ROOT, load_config
 from .db import connect, init_db
+from .ai import router as ai_router
+from .knowledge import router as knowledge_router
+from .plan import router as plan_router
+from .policy import router as policy_router
 from .quiz import router as quiz_router
 from .feedback import router as feedback_router
+from .stats import router as stats_router
 
 DIST_DIR = APP_ROOT / "frontend" / "dist"
 
@@ -53,8 +58,8 @@ NO_FRONTEND_HTML = """<!doctype html>
     <li>重新双击 <code>启动服务.bat</code>，窗口会自动构建前端并打开页面。</li>
   </ol>
   <div class="tip">
-    临时替代：仓库中的旧版网页刷题服务 <code>web/启动服务.bat</code> 只用 Python 标准库，
-    无需安装 Node.js，双击即可使用（功能较简）。
+    急用时也可先用接口模式：命令行运行 <code>app/start.py --skip-frontend --no-browser</code>，
+    后端接口（<code>/api/health</code> 等）立即可用；网页界面装好 Node 后再补构建。
   </div>
 </div>
 </body>
@@ -68,6 +73,11 @@ def create_app() -> FastAPI:
     app = FastAPI(title="复习管理系统", version=__version__)
     app.include_router(quiz_router)
     app.include_router(feedback_router)
+    app.include_router(plan_router)
+    app.include_router(stats_router)
+    app.include_router(knowledge_router)
+    app.include_router(policy_router)
+    app.include_router(ai_router)
 
     @app.get("/api/health")
     def health() -> dict:

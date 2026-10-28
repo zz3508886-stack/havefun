@@ -9,6 +9,22 @@ import type {
   ReviewRequest,
   WrongPaperResponse,
   WrongPaperItem,
+  PlanNode,
+  CheckinRequest,
+  CheckinResponse,
+  PlanCheckin,
+  StatsOverview,
+  TrendResponse,
+  SubjectStat,
+  WeakResponse,
+  ErrorTypesResponse,
+  PolicyDoc,
+  PolicyDocDetail,
+  KeyDate,
+  School,
+  KnowledgeUnit,
+  KnowledgeUnitDetail,
+  Deck,
 } from './types'
 
 async function getJSON<T>(url: string): Promise<T> {
@@ -52,4 +68,21 @@ export const api = {
   submitWrong: (items: WrongPaperItem[], answers: Record<string, string>) =>
     postJSON<SubmitResponse>('/api/quiz/submit-wrong', { items, answers }),
   wrong: () => getJSON<WrongItem[]>('/api/quiz/wrong'),
+  planNodes: () => getJSON<PlanNode[]>('/api/plan/nodes'),
+  planCheckin: (req: CheckinRequest) => postJSON<CheckinResponse>('/api/plan/checkin', req),
+  planCheckins: () => getJSON<PlanCheckin[]>('/api/plan/checkins'),
+  statsOverview: () => getJSON<StatsOverview>('/api/stats/overview'),
+  statsTrend: (days = 30) => getJSON<TrendResponse>(`/api/stats/trend?days=${days}`),
+  statsSubjects: () => getJSON<SubjectStat[]>('/api/stats/subjects'),
+  statsWeak: (limit = 10) => getJSON<WeakResponse>(`/api/stats/weak?limit=${limit}`),
+  statsErrorTypes: () => getJSON<ErrorTypesResponse>('/api/stats/error-types'),
+  policyDocs: () => getJSON<PolicyDoc[]>('/api/policy/docs'),
+  policyDoc: (path: string) =>
+    getJSON<PolicyDocDetail>(`/api/policy/doc?path=${encodeURIComponent(path)}`),
+  policyKeyDates: () => getJSON<KeyDate[]>('/api/policy/key-dates'),
+  policySchools: () => getJSON<School[]>('/api/policy/schools'),
+  kbUnits: () => getJSON<KnowledgeUnit[]>('/api/knowledge/units'),
+  kbUnit: (path: string) =>
+    getJSON<KnowledgeUnitDetail>(`/api/knowledge/unit?path=${encodeURIComponent(path)}`),
+  kbDecks: () => getJSON<Deck[]>('/api/knowledge/decks'),
 }

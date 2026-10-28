@@ -80,7 +80,7 @@ def _block_end(sec_lines, start: int) -> int:
 
 
 def build_blocks(section_title: str, graded: GradingResult) -> list[str]:
-    """构造「作答记录 + 订正反馈(5类错因) + 评估」三块（移植 web/lib.py）。"""
+    """构造「作答记录 + 订正反馈(5类错因) + 评估」三块（移植自已退役的初版服务）。"""
     results = graded.results
     summary = graded.summary
 
@@ -128,6 +128,13 @@ def build_blocks(section_title: str, graded: GradingResult) -> list[str]:
             )
         else:
             fb_lines.append(f"| {t} | — | 本轮无此类错误 | 🟢 |")
+    # 待复核行（R19 一致性）：有未判题目时「是否攻克」不全绿，
+    # 总体掌握才能保持 🟨 学习中，避免「反馈全绿但评估 🟨」被 R19 告警
+    pending_ids = [r.qid for r in results if r.eval_state == "pending_manual"]
+    if pending_ids:
+        fb_lines.append(
+            f"| 待复核 | {', '.join(pending_ids)} | 非客观题未判或未作答，待人工复核 | ⬜ |"
+        )
     fb_lines.append("")
     fb_lines.append("补充：系统自动记录；错因由脚本/AI 初判，最终以验证题为准。")
     fb_lines.append("")
@@ -233,6 +240,19 @@ def atomic_write_text(
         raise WriteConflict(f"目标文件已被外部修改，放弃覆盖：{target}")
 
     # 2. 原子替换
+    tmp = target.with_name(f".{target.name}.tmp")
+    tmp.write_text(new_text, encoding="utf-8")
+    os.replace(tmp, target)
+
+
+def atomic_replace(target: Path, new_text: str) -> None:
+    """原子替换（无哈希基线）：导出视图专用，供 exporter 使用。
+
+    与 atomic_write_text 的区别：不做读前比对。导出每次都基于最新读取的
+    文本做变换，外部（AI/手改）对导出区块的修改会被本次导出自然覆盖——
+    这正是「过程数据以 DB 为源」的语义。非导出场景仍应走 atomic_write_text，
+    保留写前冲突保护。
+    """
     tmp = target.with_name(f".{target.name}.tmp")
     tmp.write_text(new_text, encoding="utf-8")
     os.replace(tmp, target)

@@ -1,11 +1,13 @@
 """SQLite 连接与 schema 初始化（WAL 模式）。
 
-四张表与设计文档「SQLite Schema 参考」一节一致：doc_files /
-questions_index / quiz_attempts / plan_checkins。P0 仅建空 schema，
-P1 起由索引构建器按 mtime + hash 双层校验填充。
+表结构与设计文档「SQLite Schema 参考」一节一致：doc_files /
+questions_index / quiz_attempts / plan_checkins / quiz_feedback /
+wrongbook_reviews。P0 仅建空 schema，P1 起由索引构建器按 mtime + hash
+双层校验填充。
 
-SQLite 是「索引 + 流水账」，不是内容事实源：删除 data/quiz.db 后
-跑一次全量重建即可复活，不伤及 markdown 本体。
+定位（P9 试点后）：内容事实源是 markdown；**过程数据**（答题流水、反馈、
+打卡、错题复盘）的事实源是 SQLite，对应 md 区块由 exporter 重生成
+（见《总体设计 · 数据所有权划分》）。
 """
 
 from __future__ import annotations
@@ -76,6 +78,19 @@ CREATE TABLE IF NOT EXISTS quiz_feedback (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_feedback_qid ON quiz_feedback(qid, created_at);
+
+-- 错题复盘流水（P9 试点：错题本过程数据的事实源之一）
+-- 复盘次数 = result=1 的次数；最近连续做对满 MASTERY_REVIEWS(4) 次标记已攻克
+CREATE TABLE IF NOT EXISTS wrongbook_reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    file_path TEXT NOT NULL,
+    qid TEXT NOT NULL,
+    result INTEGER NOT NULL,           -- 1 复盘做对 / 0 仍错
+    note TEXT,                         -- 复盘时记录的正确思路/要点（可选）
+    user_id INTEGER,                   -- 预留，单用户暂空
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_reviews_qid ON wrongbook_reviews(file_path, qid, created_at);
 """
 
 

@@ -39,6 +39,9 @@ SLANG_IGNORE_WORDS = {"vs", "etc", "eg", "ie", "aka", "emoji", "pdf", "docx", "a
 # context/ 是 dev-loop 的过程记忆目录（memory.md/devlog.md 用 YAML 头部，非复习文档的
 # H1/中文编号/文档头规范），与 .codebuddy 同理整目录跳过，否则 R02/R03/R09/R11/R16 全误报。
 SKIP_DIRS = {".git", ".codebuddy", "web", "Anki卡组", "docs", "app", "context"}
+# .degrade-whitelist 为 dev-loop「有意降级」登记簿（机器配置，非复习文档，无扩展名），
+# 按文件名跳过，否则 R02「文件类型」误报。
+SKIP_FILES = {".degrade-whitelist"}
 PLACEHOLDERS = ("待填写", "待添加", "待补充")
 EMOJI_WHITELIST = {"⬜", "🟨", "✅", "🔴", "🟢", "⚠"}
 EMOJI_RANGES = ((0x1F000, 0x1FAFF), (0x2600, 0x26FF), (0x2700, 0x27BF), (0x2B00, 0x2BFF))
@@ -130,6 +133,8 @@ def iter_all_files(root: Path):
             continue
         rel = path.relative_to(root)
         if any(part in SKIP_DIRS for part in rel.parts):
+            continue
+        if path.name in SKIP_FILES:
             continue
         yield path, rel.as_posix()
 

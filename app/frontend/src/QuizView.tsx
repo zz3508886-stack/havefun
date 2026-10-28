@@ -23,7 +23,22 @@ function AnswerInput({
   value?: string
   onChange: (v: string) => void
 }) {
-  if (q.q_type === '选择题') {
+  if (q.q_type === '判断题') {
+    return (
+      <Radio.Group
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        optionType="button"
+        buttonStyle="solid"
+      >
+        <Radio.Button value="正确">正确</Radio.Button>
+        <Radio.Button value="错误">错误</Radio.Button>
+      </Radio.Group>
+    )
+  }
+  // 单选形态：带标准选项（≥2 个）即按单选渲染，不挑题型名
+  //（选择题 / 单项选择 / 字音·多音字 等摸底卷细分题型一视同仁）
+  if ((q.options || []).length >= 2) {
     const opts = (q.options || []).map((o: any) => {
       const label = typeof o === 'string' ? o : o?.label
       const text = typeof o === 'string' ? '' : o?.text ?? ''
@@ -44,19 +59,6 @@ function AnswerInput({
             {o.label}
           </Radio.Button>
         ))}
-      </Radio.Group>
-    )
-  }
-  if (q.q_type === '判断题') {
-    return (
-      <Radio.Group
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        optionType="button"
-        buttonStyle="solid"
-      >
-        <Radio.Button value="正确">正确</Radio.Button>
-        <Radio.Button value="错误">错误</Radio.Button>
       </Radio.Group>
     )
   }

@@ -1,9 +1,13 @@
-"""题目反馈：错因自选 + 「解析没看懂」→ 疑难点.md 累加；错题本联动。
+"""题目反馈：错因自选 + 「解析没看懂」→ 疑难点.md 累加；错题本联动与复盘登记。
 
 反馈持久化进 quiz_feedback 表（可靠、可聚合）；confused(解析没看懂) 时按 auto-discover
 约定累加 错题本/疑难点.md：同「专题+学科」累加出现次数，新专题插入一行，状态 ⬜。
 疑难点.md 的写入复用 writeback.atomic_write_text（读前比对 + os.replace），不跑校验器、
 不污染黑话表。错题本联动由 GET /wrong 从 quiz_attempts(is_correct=0) 派生，零额外存储。
+
+P9 试点（过程数据 DB 为源）：错题记录/统计改由 exporter 从
+quiz_attempts + quiz_feedback + wrongbook_reviews 导出到 错题本/README.md；
+POST /wrong/review 登记复盘（结果 + 正确思路要点），反馈后 best-effort 刷新导出。
 """
 
 from __future__ import annotations
@@ -151,7 +155,59 @@ def post_feedback(req: FeedbackRequest) -> dict:
             ynd_appended = True
         except Exception as exc:  # noqa: BLE001 - 累加失败不应阻断反馈落库
             logger.warning("疑难点.md 累加失败（反馈已落库）: %s", exc)
-    return {"id": fb_id, "ynd_appended": ynd_appended}
+
+    # P9：反馈可能带来新错因 → 刷新错题本导出视图（best-effort）
+    from .exporter import safe_export
+
+    wrongbook_export = safe_export("wrongbook")
+
+    # P7：交互后刷新 AI 一页纸快照（best-effort，失败不影响反馈落库）
+    from .ai import refresh_snapshot
+
+    refresh_snapshot()
+    return {"id": fb_id, "ynd_appended": ynd_appended, "wrongbook_export": wrongbook_export}
+
+
+class WrongReviewRequest(BaseModel):
+    file_path: str
+    qid: str
+    result: bool
+    note: Optional[str] = None
+
+
+@router.post("/wrong/review")
+def post_wrong_review(req: WrongReviewRequest) -> dict:
+    """错题复盘登记：结果（对/错）与要点落 wrongbook_reviews，并刷新导出视图。
+
+    复盘做满 4 次（MASTERY_REVIEWS）由导出器标记「已攻克」；note 用于记录
+    正确思路/要点，展示在 错题本/README.md 的「正确思路」列。
+    """
+    conn = connect()
+    try:
+        cur = conn.execute(
+            "INSERT INTO wrongbook_reviews (file_path, qid, result, note) VALUES (?,?,?,?)",
+            (req.file_path, req.qid, int(req.result), (req.note or "").strip() or None),
+        )
+        conn.commit()
+        review_id = cur.lastrowid
+    finally:
+        conn.close()
+
+    from .exporter import safe_export
+
+    wrongbook_export = safe_export("wrongbook")
+
+    from .ai import refresh_snapshot
+
+    refresh_snapshot()
+    return {
+        "ok": True,
+        "id": review_id,
+        "file_path": req.file_path,
+        "qid": req.qid,
+        "result": req.result,
+        "wrongbook_export": wrongbook_export,
+    }
 
 
 @router.get("/wrong")

@@ -1,4 +1,4 @@
-"""服务端判分引擎（移植 web/lib.py 的判分逻辑，适配 DB 索引）。
+"""服务端判分引擎（移植自初版网页刷题服务的判分逻辑，该服务于 P8 退役）。
 
 判分是「错一步全盘错」的模块：客观题（选择/判断）脚本即时判分；非客观题
 （填空/解答/操作/面试）走 AI 初判，未配置端点时降级为「待人工复核（pending_manual）」。
@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Callable, Optional
 
-from .parser import ERROR_TYPES, OBJECTIVE_TYPES, Question
+from .parser import ERROR_TYPES, Question, is_objective_question
 
 # AI 判分器签名：fn(question, student, answer_key) -> {"correct": bool|None,
 # "错因类型": str, "错因说明": str}。未配置端点时传 None，主观题降级待复核。
@@ -79,7 +79,7 @@ def grade_set(
     pending = 0
     for q in questions:
         student = str(answers.get(q.qid, "") or "").strip()
-        is_objective = q.q_type in OBJECTIVE_TYPES
+        is_objective = is_objective_question(q)
         rec = GradedQuestion(
             qid=q.qid,
             q_type=q.q_type,

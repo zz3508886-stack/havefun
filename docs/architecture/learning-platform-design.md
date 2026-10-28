@@ -13,8 +13,8 @@ updated: 2026-10-23
 
 设计原则：
 
-1. 文档（markdown）是内容唯一事实源；系统只读解析、按标准块回写，不擅自改内容。
-2. 交互流水落 SQLite，汇总后按 danzhao-docs 契约回写文档，供 AI 消费。
+1. 数据按类型各有唯一事实源：**内容数据**（题干、解析、知识点、政策、计划正文）以 markdown 为源，系统只读解析、按标准块回写，不擅自改内容；**过程数据**（答题流水、反馈、打卡、错题复盘）以 SQLite 为源，md 中对应区块是导出视图（见「导出契约」）。
+2. 交互流水落 SQLite，汇总后供仪表盘与 AI 取数；内容侧仍按 danzhao-docs 契约回写标准块。
 3. AI 取数是一等公民：CLI、只读 API、一页纸快照三种通道常驻。
 
 ## 技术选型
@@ -34,7 +34,7 @@ Windows 落地要点：`start.py` 跨平台一键启动器（查找 Python → �
 
 ```mermaid
 flowchart TD
-    subgraph L0["L0 文档层 markdown —— 内容唯一事实源"]
+    subgraph L0["L0 文档层 markdown —— 内容事实源（过程数据区块为导出视图）"]
         Q["题库.md / 题库解析.md"]
         D["疑难点.md / 错题本"]
         P["知识点梳理.md / 节点安排.md / 政策资讯"]
@@ -89,11 +89,12 @@ sequenceDiagram
 | 数据 | 事实源 | 系统职责 |
 | --- | --- | --- |
 | 题库、解析、知识点、政策、计划内容 | markdown | 只读解析 + 建索引；回写仅限标准块 |
-| 答题流水 attempts | SQLite | 高频追加（一次提交 = 同 batch_id 多行；写 md 会爆炸）；汇总后按需导出回写 |
-| 打卡记录 | SQLite | 明细入 DB；节点总表「状态」列按 ⬜→🟨→✅ 规则回写 |
-| 疑难点频次 | `疑难点.md` | UI 反馈按钮按既有行格式累加，与 auto-discover 共用同一张表 |
+| 答题流水 attempts / 反馈 quiz_feedback | SQLite | 高频追加（一次提交 = 同 batch_id 多行；写 md 会爆炸）；聚合后供仪表盘与 AI 快照 |
+| 错题复盘 wrongbook_reviews | SQLite | 复盘登记（结果 + 正确思路要点）；错题本三表由其与流水汇总导出 |
+| 打卡记录 plan_checkins | SQLite | 明细入 DB；节点总表「状态」列按 ⬜→🟨→✅ 规则由明细推导导出 |
+| 疑难点频次 | `错题本/疑难点.md` | UI 反馈按钮按既有行格式累加，与 auto-discover 共用同一张表（AI 策展内容，维持 md 为源，不在试点范围） |
 
-SQLite 定位为「索引 + 流水账」，不是内容事实源；markdown 不退役，既是系统的上游也是下游。删掉 `app/data/quiz.db` 只需跑一次全量重建，系统原地复活，题目、解析与笔记本体不受任何影响。
+SQLite 定位分层：对**内容数据**是「索引 + 流水账」——删掉 `app/data/quiz.db` 只需跑一次全量重建，系统原地复活，题目、解析与笔记本体不受任何影响；对**过程数据**（答题流水、反馈、打卡、错题复盘）则是事实源——删库即丢失这些记录，靠关机时拷贝 `app/data/quiz.db` 备份（见「风险与对策」）。
 
 ## 关键技术契约
 
@@ -214,13 +215,24 @@ CREATE TABLE plan_checkins (
 
 ## 回写契约
 
-回写是系统与文档工程之间的唯一写接口，破坏契约即污染 AI 的输入，故为硬约束：
+回写是系统与文档工程之间对**内容侧**的唯一写接口，破坏契约即污染 AI 的输入，故为硬约束：
 
 - **题库.md**：判分结果写入套题章节下的三块——作答记录、订正反馈（R18 要求的五类错因行：概念不清/计算失误/思路错误/审题偏差/知识遗忘）、评估（总体掌握与反馈「是否攻克」保持一致，即 R19）。答案与解析不内联（R17）。`web/lib.py` 的 `write_back` 已是合规样板，移植时保持其块级替换结构。
 - **疑难点.md**：严格按既有 8 列行格式（专题/学科/出现次数/首次出现/最近出现/关联问题摘要/对应章节链接/状态）累加。
-- **节点安排.md**：只改「节点总表」的状态列，其余列冻结。
 - **写入前过检**：过检在内存中的新内容上运行校验器规则函数（import `check_docs` 跑 `FILE_RULES`），ERROR 级不过即拒绝写入；规则随仓库演进，系统不复制规则。机制见「关键技术契约 · 原子回写」。
 - **写入互斥**：AI 与系统可能同写一文件——按块级分离（AI 写内容块、系统写反馈块）+ 哈希比对 + 文件锁，机制见「关键技术契约 · 原子回写」。
+
+## 导出契约（P9 试点：过程数据 DB 为源）
+
+过程数据在 md 中的区块由系统从 SQLite **全量重生成**（`exporter` 模块），不是回写目标：
+
+- **复习计划/节点安排.md**「一、节点总表」状态列 ← `plan_checkins` 明细推导（最近一次打卡，⬜/🟨/✅，允许复盘修正）；只改状态单元格，其余列与章节冻结。
+- **错题本/README.md**「一、错题记录 / 二、按科目统计 / 三、高频错因 TOP」← `quiz_attempts` + `quiz_feedback` + `wrongbook_reviews` 汇总；错因取学生自选（反馈优先、判分兜底），复盘做满 4 次标记「已攻克」，正确思路取复盘要点；使用说明与章节结构冻结。
+- **幂等**：内容与 DB 推导一致则不动文件；空库时保持模板原样（零 diff）。
+- **冲突语义与回写相反**：外部（AI/手改）对导出区块的修改会被下次导出覆盖——过程数据以 DB 为源即此含义；导出每次读取最新文本后再变换，不做读前哈希比对（`writeback.atomic_replace`）。
+- **触发点**：交卷 / 人工复核 / 反馈 / 复盘登记（`POST /api/quiz/wrong/review`）/ 打卡均 best-effort 导出，失败只返回降级标记、不丢流水；也可 CLI 手动重生成：`python -m app export plan|wrongbook|all`。
+- **过检与原子替换**同回写器（R14/R17 阻断 + 临时文件 + `os.replace`）。
+- **不在试点范围**：`错题本/疑难点.md`（AI 与系统共同累加的策展内容）与 `题库.md` 反馈块（AI 回填 + 系统初判混合），维持回写契约。
 
 ## 分期计划
 
@@ -228,13 +240,14 @@ CREATE TABLE plan_checkins (
 | --- | --- | --- |
 | P0 | 骨架：目录结构、`start.ps1`、FastAPI/Vite 联通、SQLite WAL 建库 | Windows 一键起全栈，health 通 |
 | P1 ✅ | 文档解析层 + 索引构建器（移植 `web/lib.py`：qid 契约、mtime+hash 双层校验、全量重建） | 已实现：parser + indexer，单元测试 8 项通过；真实语料 24 文档受监控 / 20 题入索引（标准 `### 第N题` 格式；其余表格草稿形态待补标准格式） |
-| P2 | 测验引擎：服务端判分 + AI 判简答 + R18 回写 + 原子写入 | 替代 `web/` 主功能；判分与回写冲突有 pytest 覆盖 |
-| P3 | 错题本联动 + UI 反馈按钮（错因自选、「解析没看懂」→ 疑难点.md 累加） | 做题错题自动入库，反馈直达 AI 的表 |
-| P4 | 复习计划打卡 + 节点状态回写 | 打卡明细入 DB，节点表状态列按规则变 |
-| P5 | 学情仪表盘（ECharts 趋势 + 薄弱点） | 与 stats 模块数据一致 |
-| P6 | 资料库 + 政策资讯 | 纯 CRUD 走索引层 |
-| P7 | AI 取数通道：CLI + 快照 + `/api/ai/*` | `python -m app ai summary` 可跑 |
-| P8 | `web/` 退役；README 与指导手册同步新结构 | `check_docs.py` 全仓通过 |
+| P2 ✅ | 测验引擎：服务端判分 + AI 判简答 + R18 回写 + 原子写入 | 已实现：grading（主客观状态机分流）+ writeback（三步法原子回写，内存过检仅阻断 R14/R17）+ quiz 路由（答案键不下发、review 人工复核、错题卷）；29 项 pytest 覆盖判分正确性/冲突降级/过检门/R19 一致性；`web/` 主功能已被替代 |
+| P3 ✅ | 错题本联动 + UI 反馈按钮（错因自选、「解析没看懂」→ 疑难点.md 累加） | 已实现：feedback 路由（quiz_feedback 落库 + 疑难点.md 同专题累加）+ GET /wrong 派生错题 + 前端 FeedbackRow/WrongBook；回写含「待复核」⬜ 行保持 R19 一致 |
+| P4 ✅ | 复习计划打卡 + 节点状态回写 | 已实现：plan 模块（节点总表解析、plan_checkins 明细、状态=最近一次打卡⬜/🟨/✅、只改状态列原子回写）；13 项 pytest 覆盖解析边界/推导规则/冲突/过检/HTTP 降级；前端「复习计划」页（节点表 + 打卡表单 + 明细） |
+| P5 ✅ | 学情仪表盘（ECharts 趋势 + 薄弱点） | 已实现：stats 模块（总览/每日趋势/学科掌握度/薄弱套题+重复错题榜/错因分布，只读聚合不写库；正确率口径=对/(对+错)，待复核不进分母；日期分组转 localtime）；9 项 pytest 以 HTTP 种子对齐聚合数字；前端「学情」页（ECharts 堆叠柱+正确率折线、错因环形图、榜单） |
+| P6 ✅ | 资料库 + 政策资讯 | 已实现：mdview 结构化 markdown 读取器（标题树+表格/列表/段落块、R16 文档头 meta 提取）；knowledge 模块（知识点单元索引：四件套齐全度/索引层题型统计/自评标记计数；Anki 卡组索引：txt 卡片数/层级/apkg 对照/stale 过期标记；答案键不下发）；policy 模块（政策文档清单/结构化阅读/关键时间节点/目标院校，路径穿越防护）；前端「资料库」「政策资讯」两页；14 项 pytest 全覆盖 |
+| P7 ✅ | AI 取数通道：CLI + 快照 + `/api/ai/*` | 已实现：aggregate.py 聚合层（stats 与 ai 同源，验收「仪表盘=快照」有 pytest 断言）；CLI `python -m app ai summary/weak/pending/recent/doubt/plan/snapshot`（markdown 默认 + `--json` + `--limit`，`app/__main__.py` 兼容两种入口）；一页纸快照 `app/data/ai-snapshot.md`（总量/正确率/薄弱 Top/待复核/疑难点 Top/打卡进度，交卷·反馈·打卡后 best-effort 自动刷新，失败不打断主流程）；只读 API `/api/ai/*`（`config.ai_access_token` 配了才启 Bearer/query 令牌鉴权，本机默认不启用）；11 项 pytest |
+| P8 ✅ | `web/` 退役；README 与指导手册同步新结构 | 已完成：能力比对确认 app/ 全覆盖后删除 `web/`（历史流水归档 context/epics/…/web-results-archive.json）；README 目录树补 app//docs/ 条目、指导手册补 5.10 网页系统节并修正「不涉及代码」表述、启动说明删旧版章节改「页面里都能做什么」；main.py 缺 Node 指引页去除 web/ 兜底改 start.py 接口模式；check_docs 全仓通过 |
+| P9 ✅ | 过程数据 DB 为源试点：打卡状态列与错题本三表改为导出视图 | 已实现：exporter 模块（`export_plan_status` / `export_wrongbook`，幂等、覆盖外部手改、R14/R17 过检阻断）+ wrongbook_reviews 复盘登记表与 `POST /api/quiz/wrong/review` + 交卷/复核/反馈/打卡 best-effort 触发 + CLI `python -m app export`；同步更新回写契约（新增「导出契约」）、数据所有权划分、study-session/review-coach 的写入约定；test_exporter 18 项 + test_plan 改造，全量 90 项通过 |
 
 ## 风险与对策
 
@@ -246,8 +259,14 @@ CREATE TABLE plan_checkins (
 | 校验器规则演进破坏回写 | 调用仓库 `check_docs.py` 本体跑 `FILE_RULES`，不复制规则 |
 | 判分逻辑迁移出错 | 判分是唯一「错一步全盘错」的模块，移植必须带 pytest 覆盖 |
 | AI 判题失败 | 主客观状态机分流，失败降级为「待人工复核」并可重试 |
-| SQLite 数据丢失 | 关机时拷贝 `app/data/quiz.db`，或后端提供 backup 导出端点 |
+| SQLite 数据丢失 | 过程数据（P9 起为事实源）只能靠备份：关机时拷贝 `app/data/quiz.db`，或后端提供 backup 导出端点；内容数据不受影响，跑一次全量重建即可 |
 
-## 与既有 web/ 的关系
+## 与既有 web/ 的关系（已退役，P8）
 
-新系统（P2 起）覆盖 `web/` 全部能力后 `web/` 退役；判分与回写逻辑从 `web/lib.py` 移植，测试覆盖后删除旧服务。
+初版网页刷题服务 `web/`（纯标准库单文件）的能力已全部由本系统覆盖，于 P8 删除：
+
+- 判分/回写逻辑移植进 `grading.py` / `writeback.py`（parser 的 qid 契约同源），并有 76 项 pytest 覆盖；
+- `results.json` 流水升级为 SQLite `quiz_attempts`（可聚合、可回放）；
+- 仪表盘升级为 stats/ai 双通道；
+- 唯一未覆盖项是「零依赖降级启动」（web/ 纯标准库，app/ 需 venv+pip，前端需 Node）——退役后该场景由 `start.py --skip-frontend` 接口模式承接，缺 Node 的引导页已同步改写；
+- 历史流水一份已归档至 `context/epics/learning-platform-design/web-results-archive.json`，其余随目录删除。

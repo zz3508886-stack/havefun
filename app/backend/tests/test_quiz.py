@@ -211,3 +211,41 @@ def test_precheck_gate_detects_inlined_answer():
     # R17 命中要求「**答案**」紧邻双星号（与 check_docs 规则一致）
     issues = _precheck("数学/一次函数/题库.md", "题干\n**答案**\n")
     assert any("R17" in iss for iss in issues)
+
+
+# --------------------------------------------------------------------------- #
+# 回写块与校验器一致性（R19）
+# --------------------------------------------------------------------------- #
+def test_build_blocks_pending_row_keeps_r19_consistent():
+    """有待复核题目时订正反馈须出现「待复核」⬜ 行。
+
+    否则反馈五行全 🟢 而评估为 🟨，会触发 R19「反馈全绿但总体掌握非 ✅/🟢」告警。
+    """
+    from app.writeback import build_blocks
+
+    qs = [_q("SX-002", "填空题", "x")]
+    g = grade_set(qs, {"SX-002": "x"})  # 无 AI 端点 → 待复核
+    assert g.summary["pending"] == 1
+
+    blocks = build_blocks("一次函数专项测验", g)
+    text = "\n".join(blocks)
+    assert any(
+        ln.startswith("| 待复核 |") and ln.rstrip().endswith("⬜ |") for ln in blocks
+    )
+    # 有未判题目：总体掌握不得标 ✅（R19：反馈非全绿时不应标 ✅）
+    assert "🟨 学习中" in text
+    assert "✅ 已掌握" not in text
+
+
+def test_build_blocks_all_correct_marks_mastered():
+    """全对（无错无待复核）时反馈全 🟢、总体掌握 ✅，R19 双向一致。"""
+    from app.writeback import build_blocks
+
+    qs = [_q("SX-001", "选择题", "A")]
+    g = grade_set(qs, {"SX-001": "A"})
+    assert g.summary["correct"] == 1 and g.summary["pending"] == 0
+
+    blocks = build_blocks("一次函数专项测验", g)
+    text = "\n".join(blocks)
+    assert "| 待复核 |" not in text
+    assert "✅ 已掌握" in text

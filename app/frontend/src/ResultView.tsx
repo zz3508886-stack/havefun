@@ -157,8 +157,8 @@ export default function ResultView({
               {r.stem}
             </Paragraph>
 
-            {/* 选择题：列出选项并标注「你选的」「正确的」 */}
-            {r.q_type === '选择题' && r.options?.length ? (
+            {/* 单选形态：列出选项并标注「你选的」「正确的」（不挑题型名） */}
+            {r.options?.length ? (
               <div style={{ margin: '8px 0' }}>
                 {r.options.map((o) => {
                   const letter = (o.label || '').toUpperCase()
